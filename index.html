@@ -38,6 +38,21 @@
       .hero{padding:48px 0}
       .skill-item{font-size:12px; padding:6px 12px}
     }
+    /* Navbar link hover and active background */
+    .navbar-nav .nav-link{
+      transition: background-color 0.18s ease, color 0.18s ease;
+      border-radius:8px;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus{
+      background-color: rgba(13,110,253,0.08); /* subtle blue */
+      color: var(--accent) !important;
+      text-decoration: none;
+    }
+    .navbar-nav .nav-link.active{
+      background-color: rgba(13,110,253,0.12);
+      color: var(--accent) !important;
+    }
   </style>
 </head>
 <body class="nav-smooth">
@@ -57,7 +72,7 @@
         <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item ms-2"><a class="btn resume-btn btn-sm" href="/resume.pdf" target="_blank"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
+        <li class="nav-item ms-2 mt-2"><a class="btn resume-btn btn-sm" href="/resume.pdf" target="_blank"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
       </ul>
     </div>
   </div>
@@ -675,16 +690,16 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Realtime Chat App</h5>
-            <p class="card-text text-muted">A full realtime chat using Socket.io with optional WebRTC video calls and notifications (OneSignal / Firebase). Includes authentication, groups and media sharing.</p>
+            <h5 class="card-title">Rendermind AI</h5>
+            <p class="card-text text-muted">RenderMind is an AI-powered creative platform that transforms imagination into visuals — from Text-to-Sketch, Sketch-to-Color, and Text-to-Photo generation to Expression Changer and Text-to-Tight Color tools, making image creation, editing, and refinement easier than ever.</p>
             <div class="mt-auto">
               <div class="mb-2">
-                <span class="badge bg-light text-dark tech-badge">Node.js</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
                 <span class="badge bg-light text-dark tech-badge">Socket.io</span>
-                <span class="badge bg-light text-dark tech-badge">WebRTC</span>
-                <span class="badge bg-light text-dark tech-badge">MongoDB</span>
+                <span class="badge bg-light text-dark tech-badge">Alpinejs</span>
+                <span class="badge bg-light text-dark tech-badge">Unity</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fab fa-github me-1"></i> View Repo</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://rendermind.storyboards.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
@@ -694,15 +709,15 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">SaaS Billing Portal</h5>
-            <p class="card-text text-muted">A subscription-based product using Stripe for payments, webhooks for billing events, and a Laravel backend for tenant management and invoices.</p>
+            <h5 class="card-title">Animatic Media</h5>
+            <p class="card-text text-muted">Animatic Media is a creative production company that specializes in transforming storyboards into dynamic, animated previews for films and advertisements.</p>
             <div class="mt-auto">
               <div class="mb-2">
-                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Nuxt</span>
                 <span class="badge bg-light text-dark tech-badge">Stripe</span>
-                <span class="badge bg-light text-dark tech-badge">MySQL</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fas fa-external-link-alt me-1"></i> Live Demo</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://www.animaticmedia.com/"><i class="fas fa-external-link-alt me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
@@ -712,15 +727,20 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">E-commerce (Shopify + Headless)</h5>
-            <p class="card-text text-muted">A headless Shopify storefront with Nuxt frontend and server-side rendering, custom checkout integrations and CMS for content pages.</p>
+            <h5 class="card-title">Storyboards</h5>
+            <p class="card-text text-muted">Storyboards.com Pro Workspace is a customized
+              collaboration platform built specifically for
+              Illustration & animation projects.
+              Seamless communication tools that
+              puts the power of an entire art
+              studio in your pocket.</p>
             <div class="mt-auto">
               <div class="mb-2">
-                <span class="badge bg-light text-dark tech-badge">Shopify</span>
-                <span class="badge bg-light text-dark tech-badge">Nuxt</span>
+                <span class="badge bg-light text-dark tech-badge">Reactjs</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
                 <span class="badge bg-light text-dark tech-badge">Stripe</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fas fa-book me-1"></i> Case Study</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://www.storyboards.com/"><i class="fas fa-book me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
@@ -730,15 +750,15 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Content Site / CMS</h5>
-            <p class="card-text text-muted">Custom WordPress site with optimized theme, or a static Jamstack site using Nuxt/React and WordPress as headless CMS. Fast, SEO-friendly and easy to manage.</p>
-            <div class="mt-auto">
+            <h5 class="card-title">Amazio</h5>
+            <p class="card-text text-muted">We take pride in helping our clients shine online. The digital world comes with a variety of unique challenges, and we work with you to overcome them and build a stronger presence—one that helps you grow your company.</p>
+              <div class="mt-auto">
               <div class="mb-2">
                 <span class="badge bg-light text-dark tech-badge">WordPress</span>
                 <span class="badge bg-light text-dark tech-badge">PHP</span>
                 <span class="badge bg-light text-dark tech-badge">AWS</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fas fa-eye me-1"></i> Showcase</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://amazio.com/"><i class="fas fa-eye me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
@@ -748,15 +768,17 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Video Conferencing</h5>
-            <p class="card-text text-muted">A lightweight video conferencing app using Agora or WebRTC + signaling via Socket.io. Useful as a demo for low-latency calls and screen-sharing.</p>
+            <h5 class="card-title">Handprint</h5>
+            <p class="card-text text-muted">Empowering the economy’s transition from extractive to regenerative.
+Enabling companies to become a part of the new regenerative economy by integrating planet-positive actions into business activities in a profitable and seamless way.</p>
             <div class="mt-auto">
               <div class="mb-2">
-                <span class="badge bg-light text-dark tech-badge">Agora</span>
-                <span class="badge bg-light text-dark tech-badge">WebRTC</span>
-                <span class="badge bg-light text-dark tech-badge">Vue</span>
+                <span class="badge bg-light text-dark tech-badge">WordPress</span>
+                <span class="badge bg-light text-dark tech-badge">Shopify</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Stripe</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fas fa-play me-1"></i> Try Demo</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://handprint.tech/"><i class="fas fa-play me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
@@ -766,15 +788,15 @@
       <div class="col-md-6 col-lg-4">
         <div class="card card-project p-3 h-100">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Admin Dashboard</h5>
-            <p class="card-text text-muted">An admin panel built with React or Nuxt, connected to Laravel or Express APIs. Charts, user management, audit logs and role-based access.</p>
+            <h5 class="card-title">Bxience</h5>
+            <p class="card-text text-muted">BXIENCE is a leading job board that attracts visitors monthly. Our primary focus is prioritizing job seekers by providing them free access to various services, including job search, resume posting, and company research.</p>
             <div class="mt-auto">
               <div class="mb-2">
-                <span class="badge bg-light text-dark tech-badge">React</span>
                 <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Agora</span>
                 <span class="badge bg-light text-dark tech-badge">MySQL</span>
               </div>
-              <a class="btn btn-sm btn-outline-primary" href="#"><i class="fab fa-github me-1"></i> Repo</a>
+              <a class="btn btn-sm btn-outline-primary" href="https://bxience.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
             </div>
           </div>
         </div>
