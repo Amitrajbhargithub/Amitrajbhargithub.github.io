@@ -53,6 +53,25 @@
       background-color: rgba(13,110,253,0.12);
       color: var(--accent) !important;
     }
+    /* Typewriter styles */
+    .typewriter {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .typewriter-cursor {
+      display: inline-block;
+      width: 1ch;
+      margin-left: 2px;
+      background: transparent;
+      color: var(--accent);
+      animation: blink 1s steps(2, start) infinite;
+      font-weight: 700;
+    }
+    @keyframes blink {
+      50% { opacity: 0 }
+    }
   </style>
 </head>
 <body class="nav-smooth">
@@ -82,7 +101,7 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-7">
-        <h1 class="display-5 fw-bold">Hi — I'm <span class="text-primary">Amit Rajbhar</span></h1>
+  <h1 class="display-5 fw-bold">Hi — I'm <span id="typewriter" class="text-primary typewriter" aria-live="polite"></span><span class="typewriter-cursor">|</span></h1>
         <p class="lead text-muted">Full-stack developer with a love for clean UI, realtime systems and reliable backends. I build web apps using Laravel, Node.js, Vue/Nuxt and React — and deploy them on Ubuntu & AWS.</p>
 
         <div class="d-flex gap-2 mt-4 flex-wrap">
@@ -998,6 +1017,46 @@ Enabling companies to become a part of the new regenerative economy by integrati
       }
     });
   });
+
+  /* Typewriter implementation */
+  (function() {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
+
+    const phrases = [
+      'Amit Rajbhar',
+      'Full-stack Developer',
+      'Laravel • Node • Vue'
+    ];
+
+    let part = 0;
+    let partIndex = 0;
+    let intervalVal;
+    let typing = true;
+
+    function type() {
+      const text = phrases[part].substring(0, partIndex + (typing ? 1 : -1));
+      el.textContent = text;
+
+      if (typing) {
+        partIndex++;
+        if (partIndex === phrases[part].length) {
+          typing = false;
+          clearInterval(intervalVal);
+          setTimeout(() => { intervalVal = setInterval(type, 60); }, 1000);
+        }
+      } else {
+        partIndex--;
+        if (partIndex === 0) {
+          typing = true;
+          part = (part + 1) % phrases.length;
+        }
+      }
+    }
+
+    // start
+    intervalVal = setInterval(type, 60);
+  })();
 </script>
 </body>
 </html>
