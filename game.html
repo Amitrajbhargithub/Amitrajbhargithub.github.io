@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Amit Rajbhar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: radial-gradient(circle at top, #4f46e5 0, #020617 55%);
+      color: #0f172a;
+    }
+
+    .game-wrapper {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 20px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(12px);
+      color: #e5e7eb;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title span.icon {
+      font-size: 1.6rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.15);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .box {
+      background: radial-gradient(circle at 20% 10%, #1e293b 0, #020617 60%);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.2rem;
+      cursor: pointer;
+      user-select: none;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s ease-out, background 0.2s ease-out;
+      color: #e5e7eb;
+    }
+
+    .box:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.8);
+      border-color: #6366f1;
+    }
+
+    .box:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
+    .box.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+      transform: none;
+      box-shadow: none;
+    }
+
+    #message {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 10px 12px;
+      border-radius: 12px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px dashed rgba(148, 163, 184, 0.45);
+      color: #e5e7eb;
+    }
+
+    .message-win {
+      background: linear-gradient(120deg, rgba(34, 197, 94, 0.16), rgba(22, 163, 74, 0.1));
+      border-color: rgba(34, 197, 94, 0.6);
+      color: #bbf7d0;
+    }
+
+    .message-lose {
+      background: linear-gradient(120deg, rgba(248, 113, 113, 0.16), rgba(127, 29, 29, 0.1));
+      border-color: rgba(248, 113, 113, 0.6);
+      color: #fecaca;
+    }
+
+    .buttons-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.15s ease-out, opacity 0.15s ease-out;
+    }
+
+    #restartBtn {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.55);
+    }
+
+    #restartBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.7);
+    }
+
+    #restartBtn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.6);
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.75);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: #e5e7eb;
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+      opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 18px 16px 16px;
+        border-radius: 16px;
+      }
+
+      .title {
+        font-size: 1.15rem;
+      }
+
+      .box {
+        font-size: 1.9rem;
+        border-radius: 14px;
+      }
+
+      #message {
+        font-size: 0.85rem;
+      }
+
+      button {
+        font-size: 0.8rem;
+        padding: 7px 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="title">
+          <span class="icon">⭐</span>
+          Star &amp; Bomb Game
+        </div>
+        <p class="subtitle">
+          Tap the boxes. Find all stars and avoid the hidden bomb. One wrong click and it’s over!
+        </p>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Live round
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <span>Grid: <strong>3 × 3</strong></span>
+      <span>Safe stars: <strong>8</strong></span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div id="message">Click any box to begin this round.</div>
+
+    <div class="buttons-row">
+      <button class="btn-secondary" type="button" id="muteBtn">🔈 Sound On</button>
+      <button id="restartBtn" type="button">🔄 Restart</button>
+    </div>
+    <div style="text-align: center;margin-top: 2px;">Develope by Feku Developer</div>
+  </div>
+</div>
+
+<!-- 🔊 SOUNDS -->
+<audio id="clickSound" src="./button_click.mp3"></audio>
+<audio id="winSound" src="./winner.mp3"></audio>
+<audio id="loseSound" src="./maka.mp3"></audio>
+
+<script>
+  const grid = document.getElementById('grid');
+  const message = document.getElementById('message');
+  const restartBtn = document.getElementById('restartBtn');
+  const muteBtn = document.getElementById('muteBtn');
+  const boxes = 9;
+
+  // 🔊 Sounds
+  const clickSound = document.getElementById("clickSound");
+  const winSound   = document.getElementById("winSound");
+  const loseSound  = document.getElementById("loseSound");
+
+  let isMuted = false;
+
+  function play(sound) {
+    if (isMuted) return;
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
+
+  function setMessage(text, type = null) {
+    message.textContent = text;
+
+    message.classList.remove('message-win', 'message-lose');
+
+    if (type === 'win') {
+      message.classList.add('message-win');
+    } else if (type === 'lose') {
+      message.classList.add('message-lose');
+    }
+  }
+
+  function startGame() {
+    grid.innerHTML = "";
+    setMessage("New round started. Tap a box and try to avoid the bomb!");
+    let starCount = 0;
+
+    const bombIndex = Math.floor(Math.random() * boxes);
+
+    for (let i = 0; i < boxes; i++) {
+      const div = document.createElement('div');
+      div.className = 'box';
+
+      div.addEventListener('click', () => {
+        play(clickSound); // click sound on every tap
+
+        // Bomb clicked
+        if (i === bombIndex) {
+          div.textContent = '💣';
+          setMessage("💥 Game Over! You hit the bomb.", 'lose');
+          play(loseSound);
+          disableAllBoxes();
+        } else {
+          // Star clicked
+          if (!div.textContent) {
+            div.textContent = '⭐';
+            div.classList.add('disabled');
+            starCount++;
+
+            if (starCount === boxes - 1) {
+              setMessage("🎉 Winner! You found all the stars safely!", 'win');
+              play(winSound);
+              disableAllBoxes();
+            } else {
+              setMessage(`Nice! You’ve found ${starCount} / ${boxes - 1} stars.`);
+            }
+          }
+        }
+      });
+
+      grid.appendChild(div);
+    }
+  }
+
+  function disableAllBoxes() {
+    document.querySelectorAll('.box').forEach(box => {
+      box.classList.add('disabled');
+    });
+  }
+
+  restartBtn.addEventListener('click', () => {
+    startGame();
+  });
+
+  muteBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    muteBtn.textContent = isMuted ? '🔇 Sound Off' : '🔈 Sound On';
+  });
+
+  // First load
+  startGame();
+</script>
+
+</body>
+</html>
