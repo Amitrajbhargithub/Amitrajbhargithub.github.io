@@ -770,7 +770,7 @@
       <i class="fas fa-phone-alt me-3" style="font-size:2rem;vertical-align:middle;"></i>+91 8680922906
     </a>
     <p style="color:rgba(255,249,237,.35);font-size:13px;">📍 360/27, Paraippatti, Sivakasi, Tamil Nadu</p>
-    <p style="color:rgba(255,249,237,.35);font-size:13px;">✉️ manikandaprabu363@gmail.com</p>
+    <p style="color:rgba(255,249,237,.35);font-size:13px;">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87eae6e9eeece6e9e3e6f7f5e6e5f2b4b1b4c7e0eae6eeeba9e4e8ea">[email&#160;protected]</a></p>
     <button class="btn-hero-primary mt-4 mx-auto d-inline-flex" data-bs-toggle="modal" data-bs-target="#orderModal">
       <i class="fas fa-rocket me-2"></i> Place Your Order Now
     </button>
@@ -811,7 +811,7 @@
       <div class="col-lg-3 col-md-6">
         <h6>CONTACT</h6>
         <a href="tel:+918680922906"><i class="fas fa-phone me-2"></i>+91 8680922906</a>
-        <a href="mailto:manikandaprabu363@gmail.com"><i class="fas fa-envelope me-2"></i>manikandaprabu363@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#2a474b4443414b444e4b5a584b485f191c196a4d474b434604494547"><i class="fas fa-envelope me-2"></i><span class="__cf_email__" data-cfemail="7419151a1d1f151a10150406151601474247341319151d185a171b19">[email&#160;protected]</span></a>
         <a href="#"><i class="fas fa-map-marker-alt me-2"></i>Paraippatti, Sivakasi</a>
         <a href="#"><i class="fas fa-clock me-2"></i>Open All 365 Days</a>
       </div>
@@ -864,8 +864,97 @@
   </div>
 </div>
 
+<!-- CART DRAWER OVERLAY -->
+<div id="cartOverlay" onclick="closeCart()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1998;backdrop-filter:blur(4px);"></div>
+
+<!-- CART DRAWER -->
+<div id="cartDrawer" style="
+  position:fixed;right:-420px;top:0;height:100vh;width:420px;max-width:95vw;
+  background:linear-gradient(180deg,#1a1108,#0d0a05);
+  border-left:1px solid rgba(245,197,24,.2);
+  z-index:1999;transition:.4s cubic-bezier(.25,.8,.25,1);
+  display:flex;flex-direction:column;
+">
+  <div style="padding:20px 24px;border-bottom:1px solid rgba(245,197,24,.1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <i class="fas fa-shopping-cart" style="color:var(--gold);font-size:1.2rem;"></i>
+      <span style="font-family:'Cinzel Decorative',serif;color:var(--cream);font-size:1.1rem;">My Cart</span>
+      <span id="drawerItemCount" style="background:var(--crimson);color:#fff;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600;">0 items</span>
+    </div>
+    <button onclick="closeCart()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+  </div>
+  <div id="cartItemsList" style="flex:1;overflow-y:auto;padding:16px 24px;">
+    <div id="emptyCart" style="text-align:center;padding:60px 20px;color:rgba(255,249,237,.3);">
+      <div style="font-size:3.5rem;margin-bottom:16px;">🛒</div>
+      <p style="font-family:'Cinzel',serif;font-size:14px;">Cart khaali hai</p>
+      <p style="font-size:12px;margin-top:6px;">Koi product add karo!</p>
+    </div>
+  </div>
+  <div id="minOrderWarn" style="display:none;margin:0 24px 8px;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#ff8a80;">
+    <i class="fas fa-info-circle me-2"></i>Minimum order ₹3,000 hai. Aur items add karo!
+  </div>
+  <div id="cartFooter" style="display:none;padding:16px 24px 24px;border-top:1px solid rgba(245,197,24,.1);flex-shrink:0;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:rgba(255,249,237,.5);">
+      <span>Subtotal</span><span id="subtotalAmt">₹0</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:rgba(255,249,237,.5);">
+      <span>Packing (3%)</span><span id="packingAmt">₹0</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);border-top:1px solid rgba(245,197,24,.15);padding-top:12px;">
+      <span>Total</span><span id="totalAmt">₹0</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="clearCart()" style="flex:0 0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,249,237,.5);padding:10px 14px;border-radius:8px;cursor:pointer;font-size:12px;transition:.2s;" onmouseover="this.style.background='rgba(192,57,43,.2)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+        <i class="fas fa-trash"></i>
+      </button>
+      <button onclick="proceedToOrder()" style="flex:1;background:linear-gradient(135deg,var(--crimson-dark),var(--crimson));color:#fff;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;transition:.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+        <i class="fab fa-whatsapp me-2"></i> Order via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal fade modal-custom" id="orderModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">🎆 Confirm Your Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div id="modalCartSummary" style="background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.1);border-radius:10px;padding:14px;margin-bottom:20px;max-height:180px;overflow-y:auto;font-size:13px;color:rgba(255,249,237,.7);"></div>
+        <div class="mb-3">
+          <label class="form-label-custom">Full Name</label>
+          <input type="text" id="orderName" class="form-control-custom" placeholder="Apna naam likho..." />
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom">Mobile Number</label>
+          <input type="tel" id="orderPhone" class="form-control-custom" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom">State</label>
+          <select id="orderState" class="form-control-custom" style="cursor:pointer;">
+            <option value="">Select State</option>
+            <option>Tamil Nadu</option><option>Kerala</option><option>Karnataka</option>
+            <option>Andhra Pradesh</option><option>Maharashtra</option>
+            <option>Uttar Pradesh</option><option>Delhi</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom">Extra Notes (Optional)</label>
+          <textarea id="orderNotes" class="form-control-custom" rows="2" placeholder="Kuch aur notes..."></textarea>
+        </div>
+        <button class="btn-add" onclick="submitOrder()">
+          <i class="fab fa-whatsapp me-2"></i> Send Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FLOATING BUTTONS -->
-<div class="cart-float" data-bs-toggle="modal" data-bs-target="#orderModal">
+<div class="cart-float" onclick="openCart()" style="cursor:pointer;">
   <i class="fas fa-shopping-cart"></i>
   <div class="cart-badge" id="cartCount">0</div>
 </div>
@@ -873,7 +962,7 @@
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <script>
 // ── PARTICLES ──
 const canvas = document.getElementById('particles');
@@ -914,27 +1003,33 @@ animParticles();
 
 // ── PRODUCTS DATA ──
 const products = [
-  { name: '3½" Lakshmi Crackers', cat: 'sound', icon: '🧨', price: 12, tag: 'hot', desc: '1 Pkt' },
-  { name: 'Flower Pots DLX', cat: 'fountain', icon: '🌸', price: 200, tag: 'hot', desc: '1 Pkt' },
-  { name: '240 Multicolor Shots', cat: 'shot', icon: '🎆', price: 3000, tag: 'new', desc: '1 Box' },
-  { name: '120 Shot Multicolor', cat: 'shot', icon: '🎇', price: 1500, tag: '', desc: '1 Box' },
-  { name: '50cm Color Sparklers', cat: 'sparkler', icon: '✨', price: 200, tag: '', desc: '1 Box' },
-  { name: 'Ground Chakkar DLX', cat: 'fountain', icon: '🌀', price: 120, tag: '', desc: '1 Box' },
-  { name: 'Operation Sindoor Tank', cat: 'new', icon: '🪖', price: 700, tag: 'new', desc: '9 in 1' },
-  { name: 'Bada Peacock Fountain', cat: 'fountain', icon: '🦚', price: 370, tag: '', desc: '1 Box' },
-  { name: 'Digital Bomb Extra', cat: 'sound', icon: '💣', price: 275, tag: 'hot', desc: '1 Box' },
-  { name: 'Guitar Fancy', cat: 'new', icon: '🎸', price: 250, tag: 'new', desc: '1 Box' },
-  { name: '6" Pipe Single Ball', cat: 'shot', icon: '🚀', price: 1400, tag: '', desc: '1 Box' },
-  { name: 'AK47 Fountain', cat: 'new', icon: '🔫', price: 220, tag: 'new', desc: '1 Box' },
+  { id:1,  name: '3½" Lakshmi Crackers',   cat: 'sound',    icon: '🧨', price: 12,   tag: 'hot', desc: '1 Pkt' },
+  { id:2,  name: 'Flower Pots DLX',         cat: 'fountain', icon: '🌸', price: 200,  tag: 'hot', desc: '1 Pkt' },
+  { id:3,  name: '240 Multicolor Shots',    cat: 'shot',     icon: '🎆', price: 3000, tag: 'new', desc: '1 Box' },
+  { id:4,  name: '120 Shot Multicolor',     cat: 'shot',     icon: '🎇', price: 1500, tag: '',    desc: '1 Box' },
+  { id:5,  name: '50cm Color Sparklers',    cat: 'sparkler', icon: '✨', price: 200,  tag: '',    desc: '1 Box' },
+  { id:6,  name: 'Ground Chakkar DLX',      cat: 'fountain', icon: '🌀', price: 120,  tag: '',    desc: '1 Box' },
+  { id:7,  name: 'Operation Sindoor Tank',  cat: 'new',      icon: '🪖', price: 700,  tag: 'new', desc: '9 in 1' },
+  { id:8,  name: 'Bada Peacock Fountain',   cat: 'fountain', icon: '🦚', price: 370,  tag: '',    desc: '1 Box' },
+  { id:9,  name: 'Digital Bomb Extra',      cat: 'sound',    icon: '💣', price: 275,  tag: 'hot', desc: '1 Box' },
+  { id:10, name: 'Guitar Fancy',            cat: 'new',      icon: '🎸', price: 250,  tag: 'new', desc: '1 Box' },
+  { id:11, name: '6" Pipe Single Ball',     cat: 'shot',     icon: '🚀', price: 1400, tag: '',    desc: '1 Box' },
+  { id:12, name: 'AK47 Fountain',           cat: 'new',      icon: '🔫', price: 220,  tag: 'new', desc: '1 Box' },
 ];
 
-let cart = 0;
+// ── CART STATE ──
+let cartItems = {}; // { productId: qty }
+
+function getProduct(id) { return products.find(p => p.id === id); }
+
 function renderProducts(filter) {
   const grid = document.getElementById('productsGrid');
   const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-  grid.innerHTML = filtered.map((p,i) => `
+  grid.innerHTML = filtered.map((p, i) => {
+    const inCart = cartItems[p.id] || 0;
+    return `
     <div class="col-6 col-md-4 col-lg-3 product-item" data-cat="${p.cat}" style="animation: fadeUp .5s ease ${i*.07}s both;">
-      <div class="product-card">
+      <div class="product-card" id="card-${p.id}">
         <div class="product-card-img">${p.icon}</div>
         <div class="product-card-body">
           <div class="d-flex justify-content-between align-items-start mb-1">
@@ -946,13 +1041,171 @@ function renderProducts(filter) {
             <span class="product-price">₹${p.price}</span>
             <span class="product-old-price">₹${Math.round(p.price * 1.3)}</span>
           </div>
-          <button class="btn-add" onclick="addToCart(this)">
-            <i class="fas fa-plus me-1"></i> Add to Cart
-          </button>
+          <div id="btn-area-${p.id}" class="mt-3">
+            ${inCart > 0 ? qtyControlHTML(p.id, inCart) : addBtnHTML(p.id)}
+          </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+}
+
+function addBtnHTML(id) {
+  return `<button class="btn-add" onclick="addToCart(${id})">
+    <i class="fas fa-plus me-1"></i> Add to Cart
+  </button>`;
+}
+
+function qtyControlHTML(id, qty) {
+  return `<div style="display:flex;align-items:center;gap:0;border:1px solid rgba(245,197,24,.3);border-radius:8px;overflow:hidden;margin-top:0;">
+    <button onclick="changeQty(${id},-1)" style="background:rgba(192,57,43,.3);border:none;color:var(--cream);width:36px;height:36px;font-size:16px;cursor:pointer;transition:.2s;" onmouseover="this.style.background='rgba(192,57,43,.6)'" onmouseout="this.style.background='rgba(192,57,43,.3)'">−</button>
+    <span style="flex:1;text-align:center;font-family:'Cinzel',serif;font-weight:700;color:var(--gold);font-size:15px;background:rgba(245,197,24,.06);">${qty}</span>
+    <button onclick="changeQty(${id},+1)" style="background:rgba(26,188,156,.3);border:none;color:var(--cream);width:36px;height:36px;font-size:16px;cursor:pointer;transition:.2s;" onmouseover="this.style.background='rgba(26,188,156,.6)'" onmouseout="this.style.background='rgba(26,188,156,.3)'">+</button>
+  </div>
+  <div style="text-align:center;font-size:11px;color:rgba(255,249,237,.4);margin-top:4px;">₹${(getProduct(id).price * qty).toLocaleString('en-IN')} total</div>`;
+}
+
+function addToCart(id) {
+  cartItems[id] = (cartItems[id] || 0) + 1;
+  refreshCardUI(id);
+  updateCartBadge();
+  updateCartDrawer();
+  // bounce animation on float button
+  const btn = document.querySelector('.cart-float');
+  btn.style.transform = 'scale(1.3)';
+  setTimeout(() => btn.style.transform = '', 300);
+}
+
+function changeQty(id, delta) {
+  const newQty = (cartItems[id] || 0) + delta;
+  if (newQty <= 0) {
+    delete cartItems[id];
+  } else {
+    cartItems[id] = newQty;
+  }
+  refreshCardUI(id);
+  updateCartBadge();
+  updateCartDrawer();
+}
+
+function refreshCardUI(id) {
+  const area = document.getElementById(`btn-area-${id}`);
+  if (!area) return;
+  const qty = cartItems[id] || 0;
+  area.innerHTML = qty > 0 ? qtyControlHTML(id, qty) : addBtnHTML(id);
+  // highlight card
+  const card = document.getElementById(`card-${id}`);
+  if (card) {
+    if (qty > 0) {
+      card.style.borderColor = 'rgba(245,197,24,.45)';
+      card.style.boxShadow = '0 0 20px rgba(245,197,24,.12)';
+    } else {
+      card.style.borderColor = '';
+      card.style.boxShadow = '';
+    }
+  }
+}
+
+function updateCartBadge() {
+  const totalQty = Object.values(cartItems).reduce((a,b) => a+b, 0);
+  document.getElementById('cartCount').textContent = totalQty;
+}
+
+function updateCartDrawer() {
+  const itemsDiv = document.getElementById('cartItemsList');
+  const emptyDiv = document.getElementById('emptyCart');
+  const footer   = document.getElementById('cartFooter');
+  const warn     = document.getElementById('minOrderWarn');
+  const drawerCount = document.getElementById('drawerItemCount');
+
+  const keys = Object.keys(cartItems).filter(k => cartItems[k] > 0);
+  const totalQty = keys.reduce((a,k) => a + cartItems[k], 0);
+  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
+  const packing  = Math.round(subtotal * 0.03);
+  const total    = subtotal + packing;
+
+  drawerCount.textContent = totalQty + ' item' + (totalQty !== 1 ? 's' : '');
+
+  if (keys.length === 0) {
+    emptyDiv.style.display = 'block';
+    footer.style.display = 'none';
+    warn.style.display = 'none';
+    itemsDiv.innerHTML = '';
+    itemsDiv.appendChild(emptyDiv);
+    return;
+  }
+
+  emptyDiv.style.display = 'none';
+  footer.style.display = 'block';
+  warn.style.display = subtotal < 3000 ? 'block' : 'none';
+
+  itemsDiv.innerHTML = keys.map(k => {
+    const p = getProduct(+k);
+    const qty = cartItems[k];
+    return `<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(245,197,24,.07);">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,#251a0a,#3a2510);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;">${p.icon}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+        <div style="font-size:11px;color:rgba(255,249,237,.4);">₹${p.price} × ${qty}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(245,197,24,.2);border-radius:6px;overflow:hidden;flex-shrink:0;">
+        <button onclick="changeQty(${p.id},-1)" style="background:rgba(192,57,43,.2);border:none;color:var(--cream);width:28px;height:28px;cursor:pointer;font-size:14px;">−</button>
+        <span style="width:28px;text-align:center;font-size:13px;font-weight:700;color:var(--gold);background:rgba(245,197,24,.06);">${qty}</span>
+        <button onclick="changeQty(${p.id},+1)" style="background:rgba(26,188,156,.2);border:none;color:var(--cream);width:28px;height:28px;cursor:pointer;font-size:14px;">+</button>
+      </div>
+      <div style="min-width:54px;text-align:right;font-family:'Cinzel',serif;font-size:13px;color:var(--gold);">₹${(p.price*qty).toLocaleString('en-IN')}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('subtotalAmt').textContent = '₹' + subtotal.toLocaleString('en-IN');
+  document.getElementById('packingAmt').textContent  = '₹' + packing.toLocaleString('en-IN');
+  document.getElementById('totalAmt').textContent    = '₹' + total.toLocaleString('en-IN');
+}
+
+function openCart() {
+  document.getElementById('cartDrawer').style.right = '0';
+  document.getElementById('cartOverlay').style.display = 'block';
+  updateCartDrawer();
+}
+
+function closeCart() {
+  document.getElementById('cartDrawer').style.right = '-420px';
+  document.getElementById('cartOverlay').style.display = 'none';
+}
+
+function clearCart() {
+  if (!Object.keys(cartItems).length) return;
+  Object.keys(cartItems).forEach(k => delete cartItems[k]);
+  // reset all card UIs
+  products.forEach(p => {
+    const area = document.getElementById(`btn-area-${p.id}`);
+    const card = document.getElementById(`card-${p.id}`);
+    if (area) area.innerHTML = addBtnHTML(p.id);
+    if (card) { card.style.borderColor = ''; card.style.boxShadow = ''; }
+  });
+  updateCartBadge();
+  updateCartDrawer();
+}
+
+function proceedToOrder() {
+  const keys = Object.keys(cartItems).filter(k => cartItems[k] > 0);
+  if (!keys.length) return;
+  // Fill modal summary
+  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
+  const packing  = Math.round(subtotal * 0.03);
+  const total    = subtotal + packing;
+  const summary  = document.getElementById('modalCartSummary');
+  summary.innerHTML = keys.map(k => {
+    const p = getProduct(+k);
+    return `<div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+      <span>${p.icon} ${p.name} × ${cartItems[k]}</span>
+      <span style="color:var(--gold);">₹${(p.price*cartItems[k]).toLocaleString('en-IN')}</span>
+    </div>`;
+  }).join('') + `<div style="border-top:1px solid rgba(245,197,24,.15);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;font-family:'Cinzel',serif;color:var(--gold);">
+    <span>Total (incl. packing)</span><span>₹${total.toLocaleString('en-IN')}</span>
+  </div>`;
+  closeCart();
+  new bootstrap.Modal(document.getElementById('orderModal')).show();
 }
 
 function filterProducts(cat, btn) {
@@ -961,36 +1214,23 @@ function filterProducts(cat, btn) {
   renderProducts(cat);
 }
 
-function addToCart(btn) {
-  cart++;
-  document.getElementById('cartCount').textContent = cart;
-  btn.textContent = '✓ Added!';
-  btn.style.background = 'linear-gradient(135deg,#1abc9c,#16a085)';
-  setTimeout(() => {
-    btn.innerHTML = '<i class="fas fa-plus me-1"></i> Add to Cart';
-    btn.style.background = '';
-  }, 1500);
-}
-
 function submitOrder() {
-  const name = document.querySelector('[placeholder="Enter your name..."]').value;
-  const phone = document.querySelector('[placeholder="+91 XXXXX XXXXX"]').value;
-  const msg = document.querySelector('[placeholder="What do you want to order?"]').value;
-  const text = encodeURIComponent(`Hello Sai Crackers! 🎆\nName: ${name}\nPhone: ${phone}\nOrder: ${msg}`);
-  window.open(`https://wa.me/918680922906?text=${text}`, '_blank');
+  const name  = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const state = document.getElementById('orderState').value;
+  const notes = document.getElementById('orderNotes').value.trim();
+  const keys  = Object.keys(cartItems).filter(k => cartItems[k] > 0);
+  if (!keys.length) { alert('Cart khaali hai!'); return; }
+  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
+  const total    = subtotal + Math.round(subtotal * 0.03);
+  const itemLines = keys.map(k => {
+    const p = getProduct(+k);
+    return `  • ${p.name} × ${cartItems[k]} = ₹${(p.price*cartItems[k]).toLocaleString('en-IN')}`;
+  }).join('\n');
+  const msg = `🎆 *New Order — Sai Crackers* 🎆\n\n👤 Name: ${name || 'N/A'}\n📞 Phone: ${phone || 'N/A'}\n📍 State: ${state || 'N/A'}\n\n🛒 *Order Items:*\n${itemLines}\n\n💰 *Total: ₹${total.toLocaleString('en-IN')}* (incl. 3% packing)\n\n📝 Notes: ${notes || 'None'}`;
+  window.open('https://wa.me/918680922906?text=' + encodeURIComponent(msg), '_blank');
 }
 
 renderProducts('all');
 
-// ── INTERSECTION OBSERVER ANIMATIONS ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
-}, { threshold: .1 });
-document.querySelectorAll('.cat-card, .product-card, .why-card, .review-card').forEach(el => {
-  el.style.opacity = 0;
-  el.style.transition = 'opacity .6s ease';
-  observer.observe(el);
-});
-</script>
-</body>
-</html>
+// ── INTERSECTION OBSERVER ANIMA

@@ -1,1236 +1,1126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sai Crackers – Sivakasi</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amit Rajbhar | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --gold: #f5c518;
-      --gold-light: #ffe066;
-      --gold-dark: #b8860b;
-      --crimson: #c0392b;
-      --crimson-dark: #7b1a12;
-      --dark: #0d0a05;
-      --dark2: #1a1108;
-      --dark3: #251a0a;
-      --teal: #1abc9c;
-      --cream: #fff9ed;
+    :root{--accent:#0d6efd;--muted:#6c757d;--success:#198754}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #f8fafc; color:#0f1724}
+    .navbar-brand strong{color:var(--accent)}
+    .hero{background:linear-gradient(135deg, rgba(13,110,253,0.08), rgba(9,132,255,0.02)); padding:80px 0}
+    .card-project{border:0; border-radius:12px; box-shadow:0 6px 18px rgba(15,23,36,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease}
+    .card-project:hover{transform: translateY(-4px); box-shadow:0 12px 28px rgba(15,23,36,0.12)}
+    .tech-badge{font-size:12px; margin-right:6px; margin-bottom:6px}
+    .section-title{font-weight:700; margin-bottom:20px}
+    .resume-btn{background:linear-gradient(90deg,#06b6d4,#0ea5e9); color:#fff; border:0}
+    .resume-btn:hover{background:linear-gradient(90deg,#0891b2,#0284c7); color:#fff}
+    footer{padding:30px 0; font-size:14px; color:var(--muted)}
+    .nav-smooth{scroll-behavior:smooth}
+    .skill-category{background:#fff; border-radius:12px; padding:24px; margin-bottom:20px; box-shadow:0 4px 12px rgba(15,23,36,0.04)}
+    .skill-category h5{color:var(--accent); font-weight:600; margin-bottom:16px; font-size:18px}
+    .skill-item{display:inline-flex; align-items:center; background:#f8fafc; padding:8px 16px; border-radius:8px; margin:4px; font-size:14px; border:1px solid #e2e8f0}
+    .skill-item i{margin-right:8px; color:var(--accent)}
+    .contact-info-card{background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff; border-radius:12px; padding:30px}
+    .contact-info-card h5{color:#fff; font-weight:700}
+    .contact-info-card a{color:#fff; text-decoration:underline}
+    .form-control:focus{border-color:var(--accent); box-shadow:0 0 0 0.25rem rgba(13,110,253,0.15)}
+    .alert-success{display:none}
+    .timeline-item{position:relative; padding-left:40px; margin-bottom:30px}
+    .timeline-item::before{content:''; position:absolute; left:0; top:0; width:24px; height:24px; background:var(--accent); border-radius:50%; border:4px solid #f8fafc}
+    .timeline-item::after{content:''; position:absolute; left:11px; top:24px; width:2px; height:calc(100% + 6px); background:#e2e8f0}
+    .timeline-item:last-child::after{display:none}
+    .logo img{width:140px; height:140px; border-radius:50%; object-fit:cover;}
+    @media (max-width:576px){ 
+      .hero{padding:48px 0}
+      .skill-item{font-size:12px; padding:6px 12px}
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--dark);
-      color: var(--cream);
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
+    /* Navbar link hover and active background */
+    .navbar-nav .nav-link{
+      transition: background-color 0.18s ease, color 0.18s ease;
+      border-radius:8px;
     }
-
-    /* ── PARTICLE CANVAS ── */
-    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-
-    /* ── TOPBAR ── */
-    .topbar {
-      background: linear-gradient(90deg, var(--crimson-dark), var(--crimson));
-      padding: 6px 0;
-      font-size: 13px;
-      position: relative; z-index: 10;
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus{
+      background-color: rgba(13,110,253,0.08); /* subtle blue */
+      color: var(--accent) !important;
+      text-decoration: none;
     }
-    .topbar .marquee-wrap { overflow: hidden; }
-    .topbar .marquee-inner {
+    .navbar-nav .nav-link.active{
+      background-color: rgba(13,110,253,0.12);
+      color: var(--accent) !important;
+    }
+    /* Typewriter styles */
+    .typewriter {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee 25s linear infinite;
+      overflow: hidden;
+      vertical-align: bottom;
     }
-    .topbar .marquee-inner span { margin: 0 40px; }
-    @keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
-
-    /* ── NAVBAR ── */
-    .navbar-custom {
-      background: rgba(13,10,5,0.97);
-      border-bottom: 2px solid var(--gold-dark);
-      padding: 12px 0;
-      position: sticky; top: 0; z-index: 1000;
-      backdrop-filter: blur(10px);
-    }
-    .navbar-brand img { height: 56px; }
-    .nav-link-custom {
-      color: var(--cream) !important;
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      letter-spacing: 1px;
-      padding: 8px 16px !important;
-      transition: color .3s;
-      position: relative;
-    }
-    .nav-link-custom::after {
-      content: ''; position: absolute; bottom: 0; left: 50%; width: 0;
-      height: 2px; background: var(--gold); transition: .3s; transform: translateX(-50%);
-    }
-    .nav-link-custom:hover { color: var(--gold) !important; }
-    .nav-link-custom:hover::after { width: 70%; }
-
-    .btn-order {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      color: var(--dark) !important;
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 4px;
-      letter-spacing: 1px;
-      transition: .3s;
-      font-size: 13px;
-    }
-    .btn-order:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,197,24,.4); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 92vh;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(192,57,43,.25) 0%, transparent 70%),
-        radial-gradient(ellipse at 0% 100%, rgba(245,197,24,.1) 0%, transparent 60%),
-        linear-gradient(180deg, #0d0a05 0%, #1a1108 60%, #0d0a05 100%);
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,197,24,.08) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-      animation: pulse 4s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity:.5; } 50% { transform: translate(-50%,-50%) scale(1.3); opacity:1; } }
-
-    .hero-badge {
+    .typewriter-cursor {
       display: inline-block;
-      background: var(--crimson);
-      color: #fff;
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      padding: 6px 20px;
-      border-radius: 2px;
-      margin-bottom: 20px;
-      animation: fadeDown .8s ease both;
-    }
-    .hero h1 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      color: var(--cream);
-      animation: fadeUp .9s ease .2s both;
-    }
-    .hero h1 span { color: var(--gold); }
-    .hero p {
-      font-size: 1.1rem;
-      color: rgba(255,249,237,.65);
-      max-width: 480px;
-      line-height: 1.8;
-      animation: fadeUp .9s ease .4s both;
-    }
-    .hero-btns { animation: fadeUp .9s ease .6s both; }
-    .btn-hero-primary {
-      background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
-      color: #fff;
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      padding: 14px 36px;
-      border-radius: 4px;
-      border: none;
-      letter-spacing: 1.5px;
-      font-size: 14px;
-      transition: .3s;
-      display: inline-flex; align-items: center; gap: 10px;
-    }
-    .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(192,57,43,.5); color: #fff; }
-    .btn-hero-secondary {
+      width: 1ch;
+      margin-left: 2px;
       background: transparent;
-      border: 1.5px solid var(--gold-dark);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-weight: 600;
-      padding: 14px 36px;
-      border-radius: 4px;
-      letter-spacing: 1.5px;
-      font-size: 14px;
-      transition: .3s;
-    }
-    .btn-hero-secondary:hover { background: rgba(245,197,24,.1); color: var(--gold-light); transform: translateY(-3px); }
-
-    .hero-logo-wrap {
-      position: relative;
-      animation: fadeUp .9s ease .3s both;
-    }
-    .hero-logo-wrap img {
-      width: 320px;
-      filter: drop-shadow(0 0 40px rgba(245,197,24,.3));
-      animation: floatLogo 6s ease-in-out infinite;
-    }
-    @keyframes floatLogo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
-
-    .hero-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(245,197,24,.15);
-      animation: expandRing 4s ease-out infinite;
-    }
-    .hero-ring:nth-child(1) { width: 340px; height: 340px; animation-delay: 0s; }
-    .hero-ring:nth-child(2) { width: 440px; height: 440px; animation-delay: 1.5s; }
-    .hero-ring:nth-child(3) { width: 540px; height: 540px; animation-delay: 3s; }
-    @keyframes expandRing {
-      0% { opacity: .6; transform: scale(.9); }
-      100% { opacity: 0; transform: scale(1.1); }
-    }
-
-    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-
-    .stat-pill {
-      background: rgba(255,249,237,.05);
-      border: 1px solid rgba(245,197,24,.2);
-      border-radius: 8px;
-      padding: 16px 24px;
-      text-align: center;
-    }
-    .stat-pill .num { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: var(--gold); display: block; }
-    .stat-pill .lbl { font-size: 11px; letter-spacing: 2px; color: rgba(255,249,237,.5); text-transform: uppercase; }
-
-    /* ── SECTION HEADING ── */
-    .sec-heading {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .sec-heading .eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--crimson);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 12px;
-    }
-    .sec-heading h2 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: var(--cream);
-    }
-    .sec-heading h2 span { color: var(--gold); }
-    .divider-ornament {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      margin-top: 16px;
-    }
-    .divider-ornament .line { height: 1px; width: 80px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
-    .divider-ornament .line.r { background: linear-gradient(90deg, var(--gold-dark), transparent); }
-    .divider-ornament i { color: var(--gold); font-size: 14px; }
-
-    /* ── CATEGORIES ── */
-    .categories-section { padding: 100px 0; position: relative; }
-    .cat-card {
-      background: linear-gradient(145deg, var(--dark2), var(--dark3));
-      border: 1px solid rgba(245,197,24,.12);
-      border-radius: 12px;
-      padding: 36px 20px;
-      text-align: center;
-      transition: .4s cubic-bezier(.25,.8,.25,1);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .cat-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--crimson), var(--gold));
-      transform: scaleX(0); transition: .4s; transform-origin: left;
-    }
-    .cat-card:hover { transform: translateY(-8px); border-color: rgba(245,197,24,.35); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
-    .cat-card:hover::before { transform: scaleX(1); }
-    .cat-icon { font-size: 2.8rem; margin-bottom: 16px; display: block; }
-    .cat-card h5 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 1.5px; color: var(--cream); margin-bottom: 6px; }
-    .cat-card p { font-size: 12px; color: rgba(255,249,237,.4); margin: 0; }
-    .cat-count { background: var(--crimson); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 10px; }
-
-    /* ── PRODUCTS ── */
-    .products-section { padding: 100px 0; background: linear-gradient(180deg, var(--dark) 0%, #100c04 100%); }
-    .filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 50px; }
-    .filter-btn {
-      background: transparent;
-      border: 1px solid rgba(245,197,24,.2);
-      color: rgba(255,249,237,.6);
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 1px;
-      padding: 8px 20px;
-      border-radius: 30px;
-      transition: .3s; cursor: pointer;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
-      border-color: var(--crimson);
-      color: #fff;
-    }
-
-    .product-card {
-      background: linear-gradient(145deg, #1a1108, #251a0a);
-      border: 1px solid rgba(245,197,24,.1);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: .4s;
-      position: relative;
-    }
-    .product-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,.3); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
-    .product-card-img {
-      height: 160px;
-      background: linear-gradient(135deg, var(--dark3), #3a2510);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      position: relative; overflow: hidden;
-    }
-    .product-card-img::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at center, rgba(245,197,24,.08) 0%, transparent 70%);
-    }
-    .product-card-body { padding: 18px; }
-    .product-card-body h6 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--cream); margin-bottom: 6px; }
-    .product-card-body .sub { font-size: 11px; color: rgba(255,249,237,.4); }
-    .product-price { color: var(--gold); font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; font-weight: 700; }
-    .product-old-price { text-decoration: line-through; color: rgba(255,249,237,.3); font-size: 12px; margin-left: 6px; }
-    .btn-add {
-      background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
-      color: #fff;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 1px;
-      transition: .3s;
-      width: 100%; margin-top: 14px;
-    }
-    .btn-add:hover { background: linear-gradient(135deg, var(--crimson), #e74c3c); color: #fff; }
-
-    /* ── OFFER BANNER ── */
-    .offer-banner {
-      margin: 60px 0;
-      background:
-        linear-gradient(135deg, rgba(192,57,43,.9), rgba(123,26,18,.95)),
-        url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(245,197,24,.15)'/%3E%3C/svg%3E");
-      border: 1px solid rgba(245,197,24,.2);
-      border-radius: 16px;
-      padding: 60px 40px;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .offer-banner::before {
-      content: '🎆'; font-size: 6rem; opacity: .1;
-      position: absolute; left: -20px; top: 50%; transform: translateY(-50%);
-    }
-    .offer-banner::after {
-      content: '🎇'; font-size: 6rem; opacity: .1;
-      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
-    }
-    .offer-banner h3 { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 10px; }
-    .offer-banner .highlight { color: var(--gold-light); font-size: clamp(2.5rem, 5vw, 4rem); display: block; line-height: 1; }
-    .offer-banner p { color: rgba(255,255,255,.7); margin-bottom: 24px; }
-
-    /* ── WHY US ── */
-    .why-section { padding: 100px 0; }
-    .why-card {
-      text-align: center;
-      padding: 40px 24px;
-    }
-    .why-icon-wrap {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(192,57,43,.2), rgba(245,197,24,.1));
-      border: 1px solid rgba(245,197,24,.2);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 2rem;
-      transition: .3s;
-    }
-    .why-card:hover .why-icon-wrap { background: linear-gradient(135deg, var(--crimson-dark), rgba(245,197,24,.2)); transform: scale(1.1); }
-    .why-card h5 { font-family: 'Cinzel', serif; color: var(--cream); margin-bottom: 10px; }
-    .why-card p { font-size: 13.5px; color: rgba(255,249,237,.5); line-height: 1.8; }
-
-    /* ── TESTIMONIALS ── */
-    .reviews-section { padding: 100px 0; background: #0a0804; }
-    .review-card {
-      background: linear-gradient(145deg, #1a1108, #251a0a);
-      border: 1px solid rgba(245,197,24,.1);
-      border-radius: 12px;
-      padding: 30px;
-    }
-    .review-stars { color: var(--gold); margin-bottom: 14px; font-size: 14px; }
-    .review-card p { font-size: 14px; color: rgba(255,249,237,.65); line-height: 1.8; font-style: italic; }
-    .review-author { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
-    .review-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--crimson-dark), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-weight: 700; color: #fff; font-size: 16px; }
-    .review-author-name { font-family: 'Cinzel', serif; font-size: 13px; color: var(--cream); }
-    .review-author-sub { font-size: 11px; color: rgba(255,249,237,.35); }
-
-    /* ── CTA ── */
-    .cta-section {
-      padding: 100px 0;
-      background: radial-gradient(ellipse at center, rgba(192,57,43,.15) 0%, transparent 70%);
-      text-align: center;
-    }
-    .cta-section h2 { font-family: 'Cinzel Decorative', serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; }
-    .cta-section h2 span { color: var(--gold); }
-    .phone-link { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold); text-decoration: none; display: block; margin: 20px 0; transition: .3s; }
-    .phone-link:hover { color: var(--gold-light); text-shadow: 0 0 30px rgba(245,197,24,.4); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #060401;
-      border-top: 1px solid rgba(245,197,24,.1);
-      padding: 60px 0 30px;
-    }
-    footer h6 { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; font-size: 12px; margin-bottom: 20px; }
-    footer a { color: rgba(255,249,237,.5); text-decoration: none; font-size: 13.5px; display: block; margin-bottom: 8px; transition: .3s; }
-    footer a:hover { color: var(--gold); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.05); padding-top: 24px; margin-top: 40px; font-size: 12px; color: rgba(255,249,237,.25); }
-    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 8px; border: 1px solid rgba(245,197,24,.2); color: rgba(255,249,237,.5); margin-right: 8px; transition: .3s; text-decoration: none !important; }
-    .social-link:hover { background: var(--crimson); border-color: var(--crimson); color: #fff !important; }
-
-    /* ── CART FLOATING ── */
-    .cart-float {
-      position: fixed; bottom: 30px; right: 30px; z-index: 999;
-      background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
-      color: #fff;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: 0 8px 24px rgba(192,57,43,.5);
-      cursor: pointer;
-      transition: .3s;
-    }
-    .cart-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(192,57,43,.7); }
-    .cart-badge {
-      position: absolute; top: -4px; right: -4px;
-      background: var(--gold);
-      color: var(--dark);
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      font-size: 11px;
+      color: var(--accent);
+      animation: blink 1s steps(2, start) infinite;
       font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
     }
-
-    /* ── WHATSAPP ── */
-    .wa-float {
-      position: fixed; bottom: 30px; left: 30px; z-index: 999;
-      background: #25d366;
-      color: #fff;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 8px 24px rgba(37,211,102,.4);
-      text-decoration: none;
-      transition: .3s;
-    }
-    .wa-float:hover { transform: scale(1.1); color: #fff; }
-
-    /* ── ORDER MODAL ── */
-    .modal-custom .modal-content {
-      background: var(--dark2);
-      border: 1px solid rgba(245,197,24,.2);
-      border-radius: 16px;
-    }
-    .modal-custom .modal-header { border-bottom: 1px solid rgba(245,197,24,.1); }
-    .modal-custom .modal-title { font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size: 1.3rem; }
-    .modal-custom .btn-close { filter: invert(1); }
-    .form-control-custom {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(245,197,24,.15);
-      border-radius: 8px;
-      color: var(--cream);
-      padding: 12px 16px;
-      font-size: 14px;
-      transition: .3s;
-      width: 100%;
-    }
-    .form-control-custom:focus { outline: none; border-color: var(--gold-dark); background: rgba(255,255,255,.06); }
-    .form-control-custom::placeholder { color: rgba(255,249,237,.3); }
-    .form-label-custom { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1.5px; color: rgba(255,249,237,.6); margin-bottom: 6px; display: block; }
-
-    /* ── UTILS ── */
-    .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(245,197,24,.15), transparent); margin: 0; }
-    .tag-new { background: var(--teal); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; }
-    .tag-hot { background: var(--crimson); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; }
-
-    @media (max-width: 768px) {
-      .hero { min-height: auto; padding: 80px 0 60px; }
-      .hero-logo-wrap img { width: 200px; }
-      .hero-ring { display: none; }
+    @keyframes blink {
+      50% { opacity: 0 }
     }
   </style>
 </head>
-<body>
+<body class="nav-smooth">
 
-<canvas id="particles"></canvas>
-
-<!-- TOPBAR -->
-<div class="topbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
   <div class="container">
-    <div class="marquee-wrap">
-      <div class="marquee-inner">
-        <span>🎆 Diwali Sale Started! Up to 30% OFF</span>
-        <span>🚚 Free Delivery on Orders Above ₹5000</span>
-        <span>✨ Premium Sivakasi Crackers — All 365 Days</span>
-        <span>📞 Bulk Orders: +91 8680922906</span>
-        <span>🌟 Promise on Quality — No Compromise</span>
-        <span>🎇 10,000+ Happy Customers Across India</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-custom navbar-expand-lg">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="https://saicrackers.in/Views/Layouts/upload/68ac4718f1e0f.png" alt="Sai Crackers Logo" />
-    </a>
-    <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#navmenu" style="color:var(--gold);">
-      <i class="fas fa-bars"></i>
+    <a class="navbar-brand" href="#home"><strong>Amit</strong> Rajbhar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navmenu">
-      <ul class="navbar-nav mx-auto gap-1">
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#products">Products</a></li>
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#categories">Categories</a></li>
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#offers">Offers</a></li>
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contact</a></li>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <!-- <li class="nav-item"><a class="nav-link" href="game.html">Game</a></li> -->
+        <li class="nav-item"><a class="nav-link" href="saicracker.html">Sai Cracker</a></li>
+        <li class="nav-item ms-2 mt-2"><a class="btn resume-btn btn-sm" href="./amitrajbhar_phpdeveloper_3+_years.pdf" target="_blank"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
       </ul>
-      <button class="btn btn-order" data-bs-toggle="modal" data-bs-target="#orderModal">
-        <i class="fas fa-shopping-cart me-2"></i>Order Now
-      </button>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-glow"></div>
-  <div class="container position-relative" style="z-index:2;">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <span class="hero-badge">★ SIVAKASI'S FINEST CRACKERS ★</span>
-        <h1>Celebrate with <span>Sai</span><br/>Crackers</h1>
-        <p class="mt-3 mb-4">Premium quality pataakhe directly from Sivakasi — India's fireworks capital. Diwali, New Year, Weddings — har jashn ko yaadgaar banao! 🎆</p>
-        <div class="d-flex flex-wrap gap-3 hero-btns">
-          <button class="btn-hero-primary" data-bs-toggle="modal" data-bs-target="#orderModal">
-            <i class="fas fa-fire"></i> Shop Now
-          </button>
-          <a href="tel:+918680922906" class="btn btn-hero-secondary">
-            <i class="fas fa-phone-alt me-2"></i> Call to Order
-          </a>
+<header id="home" class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+  <h1 class="display-5 fw-bold">Hi — I'm <span id="typewriter" class="text-primary typewriter" aria-live="polite"></span><span class="typewriter-cursor">|</span></h1>
+        <p class="lead text-muted">Full-stack developer with a love for clean UI, realtime systems and reliable backends. I build web apps using Laravel, Node.js, Vue/Nuxt and React — and deploy them on Ubuntu & AWS.</p>
+
+        <div class="d-flex gap-2 mt-4 flex-wrap">
+          <a href="#projects" class="btn btn-primary btn-lg">See Projects</a>
+          <a href="#contact" class="btn btn-outline-secondary btn-lg">Contact Me</a>
         </div>
-        <div class="row g-3 mt-4">
-          <div class="col-4"><div class="stat-pill"><span class="num">100+</span><span class="lbl">Products</span></div></div>
-          <div class="col-4"><div class="stat-pill"><span class="num">10K+</span><span class="lbl">Orders</span></div></div>
-          <div class="col-4"><div class="stat-pill"><span class="num">365</span><span class="lbl">Days Open</span></div></div>
+
+        <div class="mt-4">
+          <small class="text-muted">Core skills:</small>
+          <div class="mt-2">
+            <span class="badge bg-primary tech-badge">HTML/CSS</span>
+            <span class="badge bg-primary tech-badge">Bootstrap</span>
+            <span class="badge bg-primary tech-badge">Vue / Nuxt</span>
+            <span class="badge bg-primary tech-badge">React</span>
+            <span class="badge bg-primary tech-badge">Laravel</span>
+            <span class="badge bg-primary tech-badge">Node / Express</span>
+            <span class="badge bg-primary tech-badge">Stripe</span>
+            <span class="badge bg-primary tech-badge">Socket.io</span>
+          </div>
         </div>
       </div>
-      <div class="col-lg-6 text-center position-relative">
-        <div class="hero-logo-wrap d-inline-block position-relative">
-          <div class="hero-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-          <div class="hero-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-          <div class="hero-ring" style="top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-          <img src="https://saicrackers.in/Views/Layouts/upload/68ac4718f1e0f.png" alt="Sai Crackers" />
+
+      <div class="col-lg-5 text-center mt-4 mt-lg-0">
+        <div class="card p-3" style="border-radius:14px; background:linear-gradient(180deg,#fff,#f8fbff); box-shadow:0 10px 30px rgba(13,110,253,0.06)">
+          <div class="logo">
+            <img src="./logo.png" alt="">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title mb-1">Amit Rajbhar</h5>
+            <p class="text-muted small mb-2">Full-stack Developer • Laravel • Node • Express • CodeIgniter • Vue • React </p>
+            <div class="d-flex justify-content-center gap-2">
+              <a class="btn btn-sm btn-outline-primary" href="#projects">Projects</a>
+              <a class="btn btn-sm btn-outline-secondary" href="https://github.com/Amitrajbhargithub" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">About Me</h2>
+    
+    <div class="row gy-4">
+      <div class="col-lg-8">
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4">
+          <h4 class="mb-3">Who I Am</h4>
+          <p class="mb-3">I'm a passionate full-stack web developer who loves building performant, maintainable applications that solve real problems. With expertise in both frontend and backend technologies, I create seamless user experiences backed by robust server architectures.</p>
+          
+          <p class="mb-3">My journey in web development has led me to specialize in:</p>
+          <ul class="mb-3">
+            <li><strong>Modern Web Applications:</strong> Building responsive, interactive interfaces with Vue.js, Nuxt.js, and React</li>
+            <li><strong>Backend Development:</strong> Creating scalable APIs and services using Laravel, Node.js, and Express</li>
+            <li><strong>Realtime Systems:</strong> Implementing chat applications, video conferencing, and live updates using Socket.io, WebRTC, and Agora</li>
+            <li><strong>E-commerce Solutions:</strong> Developing shopping platforms with Shopify and custom integrations</li>
+            <li><strong>Payment Integration:</strong> Seamless Stripe integration for subscriptions and one-time payments</li>
+          </ul>
+
+          <p>I believe in writing clean, maintainable code and staying current with industry best practices. Whether it's optimizing database queries, implementing caching strategies, or creating intuitive user interfaces, I approach each project with attention to detail and a focus on quality.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <h4 class="mb-3">Experience & Expertise</h4>
+          
+          <div class="timeline-item">
+            <h6 class="fw-bold mb-1">Full-stack Web Development</h6>
+            <p class="text-muted small mb-2">Building complete web applications from concept to deployment</p>
+            <p class="mb-0">Experienced in developing everything from simple landing pages to complex SaaS platforms with subscription billing, user management, and analytics dashboards.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h6 class="fw-bold mb-1">E-commerce Development</h6>
+            <p class="text-muted small mb-2">Custom online stores and Shopify solutions</p>
+            <p class="mb-0">Built headless e-commerce platforms, custom Shopify themes, and integrated payment gateways for seamless checkout experiences.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h6 class="fw-bold mb-1">Realtime Applications</h6>
+            <p class="text-muted small mb-2">Chat systems, video conferencing, and live notifications</p>
+            <p class="mb-0">Developed realtime communication platforms using WebSocket technologies, implementing features like group chats, video calls, and push notifications.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h6 class="fw-bold mb-1">Cloud Deployment & DevOps</h6>
+            <p class="text-muted small mb-2">Ubuntu, AWS, cPanel, and SiteGround hosting</p>
+            <p class="mb-0">Proficient in deploying and maintaining applications across various hosting platforms, configuring servers, and implementing CI/CD pipelines.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4">
+          <h5 class="mb-3"><i class="fas fa-code text-primary me-2"></i>Tech Stack</h5>
+          <p class="mb-2"><strong>Frontend:</strong></p>
+          <p class="text-muted small">HTML5, CSS3, JavaScript (ES6+), Bootstrap, Tailwind CSS, Vue.js, Nuxt.js, React</p>
+          
+          <p class="mb-2 mt-3"><strong>Backend:</strong></p>
+          <p class="text-muted small">PHP (Laravel, CodeIgniter), Node.js, Express.js, Python</p>
+          
+          <p class="mb-2 mt-3"><strong>Databases:</strong></p>
+          <p class="text-muted small">MySQL, MongoDB, PostgreSQL</p>
+          
+          <p class="mb-2 mt-3"><strong>Tools & Platforms:</strong></p>
+          <p class="text-muted small">Git, GitHub, Bitbucket, Docker, Composer, npm, Webpack</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4">
+          <h5 class="mb-3"><i class="fas fa-chart-line text-primary me-2"></i>Quick Stats</h5>
+          <div class="mb-3 pb-3 border-bottom">
+            <div class="d-flex justify-content-between mb-1">
+              <span class="small">Projects Completed</span>
+              <strong>25+</strong>
+            </div>
+          </div>
+          <!-- <div class="mb-3 pb-3 border-bottom">
+            <div class="d-flex justify-content-between mb-1">
+              <span class="small">Happy Clients</span>
+              <strong>30+</strong>
+            </div>
+          </div> -->
+          <div class="mb-3 pb-3 border-bottom">
+            <div class="d-flex justify-content-between mb-1">
+              <span class="small">Technologies Mastered</span>
+              <strong>7+</strong>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1">
+              <span class="small">Years Experience</span>
+              <strong>3+</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <h5 class="mb-3"><i class="fas fa-certificate text-primary me-2"></i>Certifications</h5>
+          <p class="small text-muted mb-2">• AWS Certified Developer</p>
+          <p class="small text-muted mb-2">• MongoDB Certified Developer</p>
+          <p class="small text-muted mb-0">• Laravel Certified Developer</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 
-<!-- CATEGORIES -->
-<section class="categories-section" id="categories">
+<!-- SKILLS SECTION -->
+<section id="skills" class="py-2 bg-light">
   <div class="container">
-    <div class="sec-heading">
-      <span class="eyebrow">Browse by Category</span>
-      <h2>Our <span>Collections</span></h2>
-      <div class="divider-ornament">
-        <div class="line"></div><i class="fas fa-star"></i><div class="line r"></div>
+    <h2 class="section-title text-center mb-5">Technical Skills</h2>
+    
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-palette me-2"></i>Frontend Development</h5>
+          <div>
+            <span class="skill-item"><i class="fab fa-html5"></i> HTML5</span>
+            <span class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+            <span class="skill-item"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
+            <span class="skill-item"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+            <span class="skill-item"><i class="fas fa-wind"></i> Tailwind CSS</span>
+            <span class="skill-item"><i class="fab fa-vuejs"></i> Vue.js</span>
+            <span class="skill-item"><i class="fab fa-vuejs"></i> Nuxt.js</span>
+            <span class="skill-item"><i class="fab fa-react"></i> React</span>
+            <span class="skill-item"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-server me-2"></i>Backend Development</h5>
+          <div>
+            <span class="skill-item"><i class="fab fa-php"></i> PHP</span>
+            <span class="skill-item"><i class="fab fa-laravel"></i> Laravel</span>
+            <span class="skill-item"><i class="fas fa-fire"></i> CodeIgniter</span>
+            <span class="skill-item"><i class="fab fa-node-js"></i> Node.js</span>
+            <span class="skill-item"><i class="fas fa-project-diagram"></i> Express.js</span>
+            <span class="skill-item"><i class="fab fa-python"></i> Python</span>
+            <span class="skill-item"><i class="fas fa-code"></i> RESTful APIs</span>
+            <span class="skill-item"><i class="fas fa-lock"></i> Authentication & Authorization</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-database me-2"></i>Database & Storage</h5>
+          <div>
+            <span class="skill-item"><i class="fas fa-database"></i> MySQL</span>
+            <span class="skill-item"><i class="fas fa-leaf"></i> MongoDB</span>
+            <span class="skill-item"><i class="fas fa-elephant"></i> PostgreSQL</span>
+            <span class="skill-item"><i class="fas fa-chart-line"></i> Database Optimization</span>
+            <span class="skill-item"><i class="fas fa-sync"></i> Redis Caching</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-comments me-2"></i>Realtime & Communication</h5>
+          <div>
+            <span class="skill-item"><i class="fas fa-plug"></i> Socket.io</span>
+            <span class="skill-item"><i class="fas fa-video"></i> WebRTC</span>
+            <span class="skill-item"><i class="fas fa-broadcast-tower"></i> Agora</span>
+            <span class="skill-item"><i class="fas fa-bell"></i> OneSignal</span>
+            <span class="skill-item"><i class="fab fa-google"></i> Firebase</span>
+            <span class="skill-item"><i class="fas fa-comment-dots"></i> Live Chat</span>
+            <span class="skill-item"><i class="fas fa-users"></i> Video Conferencing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-shopping-cart me-2"></i>E-commerce & CMS</h5>
+          <div>
+            <span class="skill-item"><i class="fab fa-shopify"></i> Shopify</span>
+            <span class="skill-item"><i class="fab fa-wordpress"></i> WordPress</span>
+            <span class="skill-item"><i class="fab fa-stripe"></i> Stripe Integration</span>
+            <span class="skill-item"><i class="fas fa-credit-card"></i> Payment Gateways</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="skill-category">
+          <h5><i class="fas fa-cloud me-2"></i>Deployment & DevOps</h5>
+          <div>
+            <span class="skill-item"><i class="fab fa-ubuntu"></i> Ubuntu Server</span>
+            <span class="skill-item"><i class="fab fa-aws"></i> AWS (EC2, S3, RDS)</span>
+            <span class="skill-item"><i class="fas fa-server"></i> cPanel</span>
+            <span class="skill-item"><i class="fas fa-globe"></i> SiteGround</span>
+            <span class="skill-item"><i class="fab fa-docker"></i> Docker</span>
+            <span class="skill-item"><i class="fab fa-github"></i> GitHub</span>
+            <span class="skill-item"><i class="fab fa-bitbucket"></i> Bitbucket</span>
+            <span class="skill-item"><i class="fas fa-infinity"></i> CI/CD</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="text-center mt-4">
+      <p class="text-muted">Always learning and expanding my skillset to stay current with the latest technologies and best practices.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE SECTION -->
+<section id="experience" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-4">Professional Experience</h2>
+    <p class="text-muted text-center mb-5">My journey through various organizations, building scalable web solutions</p>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        
+        <!-- Experience 1 -->
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4 position-relative" style="border-left: 4px solid #0d6efd">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-1 fw-bold">Software Engineer</h5>
+              <h6 class="text-primary mb-2">Jamtech Technology Pvt Ltd</h6>
+              <p class="text-muted mb-3">
+                <i class="fas fa-calendar-alt me-2"></i>July 2024 - Present
+                <span class="ms-3"><i class="fas fa-clock me-2"></i>1+ years</span>
+              </p>
+              <ul class="mb-0">
+                <li>Developing and maintaining full-stack web applications using Laravel, Vue.js, and React</li>
+                <li>Implementing realtime features with Socket.io and WebRTC for communication platforms</li>
+                <li>Integrating payment gateways (Stripe) and managing subscription-based systems</li>
+                <li>Optimizing application performance and database queries for scalability</li>
+                <li>Collaborating with cross-functional teams using Git and Agile methodologies</li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+              <div class="bg-light rounded-3 p-3">
+                <i class="fas fa-briefcase fa-3x text-primary mb-2"></i>
+                <p class="small text-muted mb-0">Current Position</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4 position-relative" style="border-left: 4px solid #6c757d">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-1 fw-bold">Software Engineer</h5>
+              <h6 class="text-primary mb-2">Ekana Technology</h6>
+              <p class="text-muted mb-3">
+                <i class="fas fa-calendar-alt me-2"></i>September 2023 - July 2024
+                <span class="ms-3"><i class="fas fa-clock me-2"></i>10 months</span>
+              </p>
+              <ul class="mb-0">
+                <li>Built responsive web applications using modern JavaScript frameworks (Vue, Nuxt)</li>
+                <li>Developed RESTful APIs with Laravel and Node.js/Express</li>
+                <li>Implemented e-commerce solutions with Shopify and custom integrations</li>
+                <li>Managed deployment on Ubuntu servers, AWS, and cPanel hosting</li>
+                <li>Integrated push notifications using OneSignal and Firebase</li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+              <div class="bg-light rounded-3 p-3">
+                <i class="fas fa-code fa-3x text-secondary mb-2"></i>
+                <p class="small text-muted mb-0">Previous Role</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4 position-relative" style="border-left: 4px solid #6c757d">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-1 fw-bold">Junior Web Developer</h5>
+              <h6 class="text-primary mb-2">Hipster Pvt Ltd</h6>
+              <p class="text-muted mb-3">
+                <i class="fas fa-calendar-alt me-2"></i>April 2022 - September 2023
+                <span class="ms-3"><i class="fas fa-clock me-2"></i>1 year 5 months</span>
+              </p>
+              <ul class="mb-0">
+                <li>Developed dynamic websites using PHP (Laravel, CodeIgniter) and MySQL</li>
+                <li>Created responsive frontend interfaces with HTML, CSS, Bootstrap</li>
+                <li>Worked on WordPress custom theme development and plugin customization</li>
+                <li>Collaborated with design teams to implement pixel-perfect UI/UX</li>
+                <li>Maintained and optimized existing web applications</li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+              <div class="bg-light rounded-3 p-3">
+                <i class="fas fa-laptop-code fa-3x text-secondary mb-2"></i>
+                <p class="small text-muted mb-0">Growth Phase</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 4 -->
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4 position-relative" style="border-left: 4px solid #6c757d">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-1 fw-bold">Web Development Intern</h5>
+              <h6 class="text-primary mb-2">Xipe Tech</h6>
+              <p class="text-muted mb-3">
+                <i class="fas fa-calendar-alt me-2"></i>January 2022 - April 2022
+                <span class="ms-3"><i class="fas fa-clock me-2"></i>4 months</span>
+              </p>
+              <ul class="mb-0">
+                <li>Learned fundamentals of web development with HTML, CSS, JavaScript</li>
+                <li>Assisted in building basic web applications and landing pages</li>
+                <li>Gained experience with PHP and MySQL database management</li>
+                <li>Participated in code reviews and team collaboration sessions</li>
+                <li>Developed problem-solving skills through real-world projects</li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+              <div class="bg-light rounded-3 p-3">
+                <i class="fas fa-graduation-cap fa-3x text-secondary mb-2"></i>
+                <p class="small text-muted mb-0">Started Journey</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Career Summary -->
+        <div class="mt-5 p-4 rounded-3" style="background: linear-gradient(135deg, rgba(13,110,253,0.05), rgba(9,132,255,0.02))">
+          <h5 class="mb-3"><i class="fas fa-chart-line text-primary me-2"></i>Career Highlights</h5>
+          <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="text-center">
+                <h3 class="text-primary mb-1">3+</h3>
+                <p class="text-muted small mb-0">Years Experience</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="text-center">
+                <h3 class="text-primary mb-1">3</h3>
+                <p class="text-muted small mb-0">Companies</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="text-center">
+                <h3 class="text-primary mb-1">25+</h3>
+                <p class="text-muted small mb-0">Projects Delivered</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="text-center">
+                <h3 class="text-primary mb-1">7+</h3>
+                <p class="text-muted small mb-0">Technologies Used</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION SECTION -->
+<section id="education" class="py-2 bg-light">
+  <div class="container">
+    <h2 class="section-title text-center mb-4">Education</h2>
+    <p class="text-muted text-center mb-5">My academic journey and qualifications</p>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        
+        <div class="row g-4">
+          
+          <!-- BTech -->
+          <div class="col-md-6">
+            <div class="bg-white p-4 rounded-3 shadow-sm h-100" style="border-top: 4px solid #0d6efd">
+              <div class="d-flex align-items-start mb-3">
+                <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+                  <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Bachelor of Technology (B.Tech)</h5>
+                  <p class="text-muted mb-2">Computer Science & Engineering</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-primary">2021 - 2025</span>
+                    <span class="badge bg-success">CGPA: 7.9/10</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted small mb-0">
+                <i class="fas fa-check-circle text-success me-2"></i>Focused on Software Engineering, Web Technologies, and Database Management
+              </p>
+            </div>
+          </div>
+
+          <!-- Diploma -->
+          <div class="col-md-6">
+            <div class="bg-white p-4 rounded-3 shadow-sm h-100" style="border-top: 4px solid #198754">
+              <div class="d-flex align-items-start mb-3">
+                <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3">
+                  <i class="fas fa-certificate fa-2x text-success"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Diploma</h5>
+                  <p class="text-muted mb-2">Technical Education</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-success">2018 - 2021</span>
+                    <span class="badge bg-success">79%</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted small mb-0">
+                <i class="fas fa-check-circle text-success me-2"></i>Developed foundational programming and technical skills
+              </p>
+            </div>
+          </div>
+
+          <!-- Intermediate -->
+          <div class="col-md-6">
+            <div class="bg-white p-4 rounded-3 shadow-sm h-100" style="border-top: 4px solid #ffc107">
+              <div class="d-flex align-items-start mb-3">
+                <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
+                  <i class="fas fa-book fa-2x text-warning"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Intermediate (12th)</h5>
+                  <p class="text-muted mb-2">Higher Secondary Education</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-warning text-dark">2016 - 2018</span>
+                    <span class="badge bg-warning text-dark">72%</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted small mb-0">
+                <i class="fas fa-check-circle text-success me-2"></i>Science stream with Mathematics and Computer Science
+              </p>
+            </div>
+          </div>
+
+          <!-- High School -->
+          <div class="col-md-6">
+            <div class="bg-white p-4 rounded-3 shadow-sm h-100" style="border-top: 4px solid #6c757d">
+              <div class="d-flex align-items-start mb-3">
+                <div class="bg-secondary bg-opacity-10 rounded-circle p-3 me-3">
+                  <i class="fas fa-school fa-2x text-secondary"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">High School (10th)</h5>
+                  <p class="text-muted mb-2">Secondary Education</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-secondary">2015 - 2016</span>
+                    <span class="badge bg-secondary">81%</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted small mb-0">
+                <i class="fas fa-check-circle text-success me-2"></i>Strong foundation in core subjects and academic excellence
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Education Timeline Visual -->
+        <div class="mt-5 p-4 rounded-3 bg-white shadow-sm">
+          <h5 class="mb-4 text-center"><i class="fas fa-timeline text-primary me-2"></i>Educational Journey</h5>
+          <div class="position-relative" style="padding: 20px 0">
+            <!-- Timeline line -->
+            <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #e2e8f0; transform: translateX(-50%)"></div>
+            
+            <div class="row text-center">
+              <div class="col-3">
+                <div class="position-relative" style="z-index: 2">
+                  <div class="bg-secondary rounded-circle mx-auto mb-2" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <i class="fas fa-school fa-lg text-white"></i>
+                  </div>
+                  <h6 class="mb-1">High School</h6>
+                  <p class="small text-muted mb-0">2016</p>
+                  <p class="small fw-bold text-secondary mb-0">81%</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="position-relative" style="z-index: 2">
+                  <div class="bg-warning rounded-circle mx-auto mb-2" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <i class="fas fa-book fa-lg text-white"></i>
+                  </div>
+                  <h6 class="mb-1">Intermediate</h6>
+                  <p class="small text-muted mb-0">2018</p>
+                  <p class="small fw-bold text-warning mb-0">72%</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="position-relative" style="z-index: 2">
+                  <div class="bg-success rounded-circle mx-auto mb-2" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <i class="fas fa-certificate fa-lg text-white"></i>
+                  </div>
+                  <h6 class="mb-1">Diploma</h6>
+                  <p class="small text-muted mb-0">2021</p>
+                  <p class="small fw-bold text-success mb-0">79%</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="position-relative" style="z-index: 2">
+                  <div class="bg-primary rounded-circle mx-auto mb-2" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <i class="fas fa-graduation-cap fa-lg text-white"></i>
+                  </div>
+                  <h6 class="mb-1">B.Tech</h6>
+                  <p class="small text-muted mb-0">2025</p>
+                  <p class="small fw-bold text-primary mb-0">7.9 CGPA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications & Achievements -->
+        <div class="mt-4 p-4 rounded-3" style="background: linear-gradient(135deg, rgba(13,110,253,0.05), rgba(9,132,255,0.02))">
+          <h5 class="mb-3"><i class="fas fa-award text-primary me-2"></i>Key Achievements</h5>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-star text-warning fa-2x me-3"></i>
+                <div>
+                  <h6 class="mb-0">Academic Excellence</h6>
+                  <p class="small text-muted mb-0">Consistent performance throughout education</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-code text-primary fa-2x me-3"></i>
+                <div>
+                  <h6 class="mb-0">Technical Focus</h6>
+                  <p class="small text-muted mb-0">Specialized in Computer Science</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-trophy text-success fa-2x me-3"></i>
+                <div>
+                  <h6 class="mb-0">Professional Ready</h6>
+                  <p class="small text-muted mb-0">Strong theoretical foundation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-4">Top Projects</h2>
+    <p class="text-muted text-center mb-5">A showcase of my work across different technologies and domains</p>
+
     <div class="row g-4">
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">🧨</span>
-          <h5>Sound Crackers</h5>
-          <p>Classic sounds</p>
-          <span class="cat-count">6 items</span>
+      <!-- Project 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Rendermind AI</h5>
+            <p class="card-text text-muted">RenderMind is an AI-powered creative platform that transforms imagination into visuals — from Text-to-Sketch, Sketch-to-Color, and Text-to-Photo generation to Expression Changer and Text-to-Tight Color tools, making image creation, editing, and refinement easier than ever.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Socket.io</span>
+                <span class="badge bg-light text-dark tech-badge">Alpinejs</span>
+                <span class="badge bg-light text-dark tech-badge">Unity</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://rendermind.storyboards.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">🌸</span>
-          <h5>Flower Pots</h5>
-          <p>Blooming colors</p>
-          <span class="cat-count">6 items</span>
+
+      <!-- Project 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Animatic Media</h5>
+            <p class="card-text text-muted">Animatic Media is a creative production company that specializes in transforming storyboards into dynamic, animated previews for films and advertisements.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Nuxt</span>
+                <span class="badge bg-light text-dark tech-badge">Stripe</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://www.animaticmedia.com/"><i class="fas fa-external-link-alt me-1"></i> Live Demo</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">💣</span>
-          <h5>Bombs</h5>
-          <p>Powerful blasts</p>
-          <span class="cat-count">7 items</span>
+
+      <!-- Project 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Storyboards</h5>
+            <p class="card-text text-muted">Storyboards.com Pro Workspace is a customized
+              collaboration platform built specifically for
+              Illustration & animation projects.
+              Seamless communication tools that
+              puts the power of an entire art
+              studio in your pocket.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Reactjs</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Stripe</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://www.storyboards.com/"><i class="fas fa-book me-1"></i> Live Demo</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">🎆</span>
-          <h5>Shots</h5>
-          <p>Sky displays</p>
-          <span class="cat-count">6 items</span>
+
+      <!-- Project 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Amazio</h5>
+            <p class="card-text text-muted">We take pride in helping our clients shine online. The digital world comes with a variety of unique challenges, and we work with you to overcome them and build a stronger presence—one that helps you grow your company.</p>
+              <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">WordPress</span>
+                <span class="badge bg-light text-dark tech-badge">PHP</span>
+                <span class="badge bg-light text-dark tech-badge">AWS</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://amazio.com/"><i class="fas fa-eye me-1"></i> Live Demo</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">✨</span>
-          <h5>Sparklers</h5>
-          <p>Kids favourite</p>
-          <span class="cat-count">8 items</span>
+
+      <!-- Project 5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Handprint</h5>
+            <p class="card-text text-muted">Empowering the economy’s transition from extractive to regenerative.
+Enabling companies to become a part of the new regenerative economy by integrating planet-positive actions into business activities in a profitable and seamless way.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">WordPress</span>
+                <span class="badge bg-light text-dark tech-badge">Shopify</span>
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Stripe</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://handprint.tech/"><i class="fas fa-play me-1"></i> Live Demo</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <div class="cat-card">
-          <span class="cat-icon">⛲</span>
-          <h5>Fountains</h5>
-          <p>Fancy varieties</p>
-          <span class="cat-count">25+ items</span>
+
+      <!-- Project 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Bxience</h5>
+            <p class="card-text text-muted">BXIENCE is a leading job board that attracts visitors monthly. Our primary focus is prioritizing job seekers by providing them free access to various services, including job search, resume posting, and company research.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Agora</span>
+                <span class="badge bg-light text-dark tech-badge">MySQL</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://bxience.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Jaazpire</h5>
+            <p class="card-text text-muted">Jaaspire, Social networking platform.It is total creative freedom. Enjoy privacy, expert support, and a censorship-free platform.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Agora</span>
+                <span class="badge bg-light text-dark tech-badge">OneSignal</span>
+                <span class="badge bg-light text-dark tech-badge">Alpinejs</span>
+                <span class="badge bg-light text-dark tech-badge">Stripe</span>
+                <span class="badge bg-light text-dark tech-badge">Instagram Story Upload features</span>
+                <span class="badge bg-light text-dark tech-badge">MySQL</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://jaaspire.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 8 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Innersoul</h5>
+            <p class="card-text text-muted">Innersoul providing holistic mental health therapy services.</p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Vuejs</span>
+                <span class="badge bg-light text-dark tech-badge">WebRTC</span>
+                <span class="badge bg-light text-dark tech-badge">OneSignal</span>
+                <span class="badge bg-light text-dark tech-badge">MySQL</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://www.innersoul.in/"><i class="fab fa-github me-1"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 9 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-project p-3 h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Tam America</h5>
+            <p class="card-text text-muted">Tam america is news agency.Which is providing the your journey as you improve the efficiency, effectiveness, safety, resiliency and accessibility of public transportation systems to prepare for a new era of mobility. We value leadership, innovation and simplicity. </p>
+            <div class="mt-auto">
+              <div class="mb-2">
+                <span class="badge bg-light text-dark tech-badge">Laravel</span>
+                <span class="badge bg-light text-dark tech-badge">Vuejs</span>
+                <span class="badge bg-light text-dark tech-badge">WebRTC</span>
+                <span class="badge bg-light text-dark tech-badge">OneSignal</span>
+                <span class="badge bg-light text-dark tech-badge">MySQL</span>
+              </div>
+              <a class="btn btn-sm btn-outline-primary" href="https://tam-america.com/"><i class="fab fa-github me-1"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-2 bg-light">
+  <div class="container">
+    <h2 class="section-title text-center mb-4">Get In Touch</h2>
+    <p class="text-muted text-center mb-5">Have a project in mind or want to discuss opportunities? I'd love to hear from you!</p>
+
+    <div class="row">
+      <div class="col-lg-7 mb-4">
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <h5 class="mb-3">Send Me a Message</h5>
+          
+          <div class="alert alert-success" id="successMessage">
+            <i class="fas fa-check-circle me-2"></i> Thank you! Your message has been sent successfully.
+          </div>
+
+          <form id="contactForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Your Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Your Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Subject <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="subject" placeholder="Project Inquiry" required>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Message <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="message" rows="6" placeholder="Tell me about your project or inquiry..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              <i class="fas fa-paper-plane me-2"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="contact-info-card mb-4">
+          <h5 class="mb-4"><i class="fas fa-address-card me-2"></i>Contact Information</h5>
+          
+          <div class="mb-1">
+            <h6 class="mb-2"><i class="fas fa-envelope me-2"></i>Email : <a href="mailto:amitrajbhar04042001@gmail.com">amitrajbhar04042001@gmail.com</a></h6>
+          </div>
+
+          <div class="mb-1">
+            <h6 class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Location : Lucknow, Uttar Pradesh, India</h6>
+          </div>
+
+          <div class="mb-1">
+            <p class="mb-1">
+              <a href="https://github.com/Amitrajbhargithub" target="_blank" class="text-white">
+                <i class="fab fa-github me-2"></i>GitHub Profile
+              </a>
+            </p>
+            <p class="mb-1">
+              <a href="https://www.linkedin.com/in/amitrajbhar06" target="_blank" class="text-white">
+                <i class="fab fa-linkedin me-2"></i>LinkedIn Profile
+              </a>
+            </p>
+            <p class="mb-0">
+              <a href="./amitrajbhar_phpdeveloper_3+_years.pdf" target="_blank" class="text-white">
+                <i class="fas fa-file-pdf me-2"></i>Download Resume
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <h5 class="mb-3"><i class="fas fa-comments me-2 text-primary"></i>Why Work With Me?</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Clean, maintainable code</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Responsive communication</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>On-time delivery</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Post-launch support</li>
+            <li class="mb-0"><i class="fas fa-check-circle text-success me-2"></i>Flexible collaboration</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
-<div class="section-divider"></div>
 
-<!-- PRODUCTS -->
-<section class="products-section" id="products">
+<footer class="bg-white mt-5">
   <div class="container">
-    <div class="sec-heading">
-      <span class="eyebrow">Premium Selection</span>
-      <h2>Best <span>Sellers</span></h2>
-      <div class="divider-ornament">
-        <div class="line"></div><i class="fas fa-star"></i><div class="line r"></div>
+    <div class="row align-items-center py-4">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <p class="mb-0">&copy; <span id="year"></span> Amit Rajbhar. All rights reserved.</p>
       </div>
-    </div>
-    <div class="filter-tabs">
-      <button class="filter-btn active" onclick="filterProducts('all', this)">All Items</button>
-      <button class="filter-btn" onclick="filterProducts('sound', this)">Sound</button>
-      <button class="filter-btn" onclick="filterProducts('fountain', this)">Fountains</button>
-      <button class="filter-btn" onclick="filterProducts('shot', this)">Shots</button>
-      <button class="filter-btn" onclick="filterProducts('sparkler', this)">Sparklers</button>
-      <button class="filter-btn" onclick="filterProducts('new', this)">New Arrivals</button>
-    </div>
-    <div class="row g-4" id="productsGrid">
-      <!-- Products injected by JS -->
-    </div>
-  </div>
-</section>
-<div class="section-divider"></div>
-
-<!-- OFFER BANNER -->
-<section id="offers" class="py-5">
-  <div class="container">
-    <div class="offer-banner">
-      <h3>🎇 Diwali Special Offer</h3>
-      <span class="highlight">UP TO 30% OFF</span>
-      <p class="mt-3">On all orders above ₹5,000 — Bulk orders welcome!</p>
-      <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <button class="btn-hero-primary" data-bs-toggle="modal" data-bs-target="#orderModal">
-          <i class="fas fa-shopping-bag me-2"></i>Grab the Deal
-        </button>
-        <a href="tel:+918680922906" class="btn btn-hero-secondary">
-          <i class="fab fa-whatsapp me-2"></i>WhatsApp Order
+      <div class="col-md-6 text-center text-md-end">
+        <a class="btn btn-outline-secondary btn-sm me-2" href="https://www.linkedin.com/in/amitrajbhar06/" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a class="btn btn-outline-secondary btn-sm me-2" href="https://github.com/Amitrajbhargithub" target="_blank">
+          <i class="fab fa-github"></i>
         </a>
       </div>
     </div>
   </div>
-</section>
-
-<!-- WHY US -->
-<section class="why-section" id="about">
-  <div class="container">
-    <div class="sec-heading">
-      <span class="eyebrow">Why Choose Us</span>
-      <h2>The <span>Sai</span> Difference</h2>
-      <div class="divider-ornament">
-        <div class="line"></div><i class="fas fa-star"></i><div class="line r"></div>
-      </div>
-    </div>
-    <div class="row g-4">
-      <div class="col-6 col-md-3">
-        <div class="why-card">
-          <div class="why-icon-wrap">🏭</div>
-          <h5>Direct from Factory</h5>
-          <p>Straight from Sivakasi — no middlemen, best prices guaranteed.</p>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="why-card">
-          <div class="why-icon-wrap">🛡️</div>
-          <h5>Quality Promise</h5>
-          <p>Every product is tested and certified for safety and performance.</p>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="why-card">
-          <div class="why-icon-wrap">🚀</div>
-          <h5>Fast Delivery</h5>
-          <p>Pan-India delivery with secure packaging. Order with confidence.</p>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="why-card">
-          <div class="why-icon-wrap">💰</div>
-          <h5>Best Prices</h5>
-          <p>Wholesale rates for bulk orders. Min order just ₹3,000.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="section-divider"></div>
-
-<!-- REVIEWS -->
-<section class="reviews-section">
-  <div class="container">
-    <div class="sec-heading">
-      <span class="eyebrow">Customer Love</span>
-      <h2>What They <span>Say</span></h2>
-      <div class="divider-ornament">
-        <div class="line"></div><i class="fas fa-star"></i><div class="line r"></div>
-      </div>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Bahut hi badhiya quality thi. Diwali pe saare crackers ek dum perfect the. Iske alawa price bhi kaafi reasonable tha. Definitely order karunga dobara!"</p>
-          <div class="review-author">
-            <div class="review-avatar">R</div>
-            <div>
-              <div class="review-author-name">Rahul Sharma</div>
-              <div class="review-author-sub">Mumbai</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Bulk order kiya tha shaadi ke liye. Packing excellent thi, delivery time pe aayi. 240 Shot wala ekdum mast tha! Sai Crackers best hai!"</p>
-          <div class="review-author">
-            <div class="review-avatar">P</div>
-            <div>
-              <div class="review-author-name">Priya Nair</div>
-              <div class="review-author-sub">Chennai</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="review-card">
-          <div class="review-stars">★★★★☆</div>
-          <p>"Online order karna bahut easy tha. WhatsApp pe seedha baat kar sakte hain. Next year bhi inhi se order karunga. Highly recommended!"</p>
-          <div class="review-author">
-            <div class="review-avatar">A</div>
-            <div>
-              <div class="review-author-name">Amit Verma</div>
-              <div class="review-author-sub">Delhi</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="section-divider"></div>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="container">
-    <h2>Ready to <span>Celebrate?</span></h2>
-    <p class="mt-3" style="color:rgba(255,249,237,.5);font-size:15px;">Call or WhatsApp us for bulk orders and special deals</p>
-    <a href="tel:+918680922906" class="phone-link">
-      <i class="fas fa-phone-alt me-3" style="font-size:2rem;vertical-align:middle;"></i>+91 8680922906
-    </a>
-    <p style="color:rgba(255,249,237,.35);font-size:13px;">📍 360/27, Paraippatti, Sivakasi, Tamil Nadu</p>
-    <p style="color:rgba(255,249,237,.35);font-size:13px;">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87eae6e9eeece6e9e3e6f7f5e6e5f2b4b1b4c7e0eae6eeeba9e4e8ea">[email&#160;protected]</a></p>
-    <button class="btn-hero-primary mt-4 mx-auto d-inline-flex" data-bs-toggle="modal" data-bs-target="#orderModal">
-      <i class="fas fa-rocket me-2"></i> Place Your Order Now
-    </button>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6">
-        <img src="https://saicrackers.in/Views/Layouts/upload/68ac4718f1e0f.png" alt="Sai Crackers" style="height:70px;margin-bottom:16px;" />
-        <p style="font-size:13.5px;color:rgba(255,249,237,.4);line-height:1.8;">Premium quality crackers directly from the heart of Sivakasi. Making every celebration unforgettable since years.</p>
-        <div class="mt-3">
-          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/918680922906" class="social-link"><i class="fab fa-whatsapp"></i></a>
-          <a href="tel:+918680922906" class="social-link"><i class="fas fa-phone"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6">
-        <h6>QUICK LINKS</h6>
-        <a href="#">Home</a>
-        <a href="#products">Products</a>
-        <a href="#categories">Categories</a>
-        <a href="#offers">Offers</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <h6>CATEGORIES</h6>
-        <a href="#">Sound Crackers</a>
-        <a href="#">Flower Pots</a>
-        <a href="#">Shots & Pipes</a>
-        <a href="#">Fountains</a>
-        <a href="#">Sparklers</a>
-        <a href="#">New Arrivals</a>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <h6>CONTACT</h6>
-        <a href="tel:+918680922906"><i class="fas fa-phone me-2"></i>+91 8680922906</a>
-        <a href="/cdn-cgi/l/email-protection#2a474b4443414b444e4b5a584b485f191c196a4d474b434604494547"><i class="fas fa-envelope me-2"></i><span class="__cf_email__" data-cfemail="7419151a1d1f151a10150406151601474247341319151d185a171b19">[email&#160;protected]</span></a>
-        <a href="#"><i class="fas fa-map-marker-alt me-2"></i>Paraippatti, Sivakasi</a>
-        <a href="#"><i class="fas fa-clock me-2"></i>Open All 365 Days</a>
-      </div>
-    </div>
-    <div class="footer-bottom text-center">
-      <p>© 2025 Sai Crackers, Sivakasi. All Rights Reserved. | Min Order: ₹3000 | Designed with ❤️</p>
-    </div>
-  </div>
 </footer>
 
-<!-- ORDER MODAL -->
-<div class="modal fade modal-custom" id="orderModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">🎆 Place Your Order</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body p-4">
-        <div class="mb-3">
-          <label class="form-label-custom">Full Name</label>
-          <input type="text" class="form-control-custom" placeholder="Apna naam likho..." />
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Mobile Number</label>
-          <input type="tel" class="form-control-custom" placeholder="+91 XXXXX XXXXX" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">State</label>
-          <select class="form-control-custom" style="cursor:pointer;">
-            <option value="">Select State</option>
-            <option>Tamil Nadu</option>
-            <option>Kerala</option>
-            <option>Karnataka</option>
-            <option>Andhra Pradesh</option>
-            <option>Maharashtra</option>
-            <option>Uttar Pradesh</option>
-            <option>Delhi</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Order Details / Message</label>
-          <textarea class="form-control-custom" rows="3" placeholder="Kya kya chahiye likhein..."></textarea>
-        </div>
-        <button class="btn-add" onclick="submitOrder()">
-          <i class="fab fa-whatsapp me-2"></i> Send Order via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CART DRAWER OVERLAY -->
-<div id="cartOverlay" onclick="closeCart()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1998;backdrop-filter:blur(4px);"></div>
-
-<!-- CART DRAWER -->
-<div id="cartDrawer" style="
-  position:fixed;right:-420px;top:0;height:100vh;width:420px;max-width:95vw;
-  background:linear-gradient(180deg,#1a1108,#0d0a05);
-  border-left:1px solid rgba(245,197,24,.2);
-  z-index:1999;transition:.4s cubic-bezier(.25,.8,.25,1);
-  display:flex;flex-direction:column;
-">
-  <div style="padding:20px 24px;border-bottom:1px solid rgba(245,197,24,.1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <i class="fas fa-shopping-cart" style="color:var(--gold);font-size:1.2rem;"></i>
-      <span style="font-family:'Cinzel Decorative',serif;color:var(--cream);font-size:1.1rem;">My Cart</span>
-      <span id="drawerItemCount" style="background:var(--crimson);color:#fff;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600;">0 items</span>
-    </div>
-    <button onclick="closeCart()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
-  </div>
-  <div id="cartItemsList" style="flex:1;overflow-y:auto;padding:16px 24px;">
-    <div id="emptyCart" style="text-align:center;padding:60px 20px;color:rgba(255,249,237,.3);">
-      <div style="font-size:3.5rem;margin-bottom:16px;">🛒</div>
-      <p style="font-family:'Cinzel',serif;font-size:14px;">Cart khaali hai</p>
-      <p style="font-size:12px;margin-top:6px;">Koi product add karo!</p>
-    </div>
-  </div>
-  <div id="minOrderWarn" style="display:none;margin:0 24px 8px;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#ff8a80;">
-    <i class="fas fa-info-circle me-2"></i>Minimum order ₹3,000 hai. Aur items add karo!
-  </div>
-  <div id="cartFooter" style="display:none;padding:16px 24px 24px;border-top:1px solid rgba(245,197,24,.1);flex-shrink:0;">
-    <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:rgba(255,249,237,.5);">
-      <span>Subtotal</span><span id="subtotalAmt">₹0</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:rgba(255,249,237,.5);">
-      <span>Packing (3%)</span><span id="packingAmt">₹0</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--gold);border-top:1px solid rgba(245,197,24,.15);padding-top:12px;">
-      <span>Total</span><span id="totalAmt">₹0</span>
-    </div>
-    <div style="display:flex;gap:10px;">
-      <button onclick="clearCart()" style="flex:0 0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,249,237,.5);padding:10px 14px;border-radius:8px;cursor:pointer;font-size:12px;transition:.2s;" onmouseover="this.style.background='rgba(192,57,43,.2)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
-        <i class="fas fa-trash"></i>
-      </button>
-      <button onclick="proceedToOrder()" style="flex:1;background:linear-gradient(135deg,var(--crimson-dark),var(--crimson));color:#fff;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;transition:.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-        <i class="fab fa-whatsapp me-2"></i> Order via WhatsApp
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ORDER MODAL -->
-<div class="modal fade modal-custom" id="orderModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">🎆 Confirm Your Order</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body p-4">
-        <div id="modalCartSummary" style="background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.1);border-radius:10px;padding:14px;margin-bottom:20px;max-height:180px;overflow-y:auto;font-size:13px;color:rgba(255,249,237,.7);"></div>
-        <div class="mb-3">
-          <label class="form-label-custom">Full Name</label>
-          <input type="text" id="orderName" class="form-control-custom" placeholder="Apna naam likho..." />
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Mobile Number</label>
-          <input type="tel" id="orderPhone" class="form-control-custom" placeholder="+91 XXXXX XXXXX" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">State</label>
-          <select id="orderState" class="form-control-custom" style="cursor:pointer;">
-            <option value="">Select State</option>
-            <option>Tamil Nadu</option><option>Kerala</option><option>Karnataka</option>
-            <option>Andhra Pradesh</option><option>Maharashtra</option>
-            <option>Uttar Pradesh</option><option>Delhi</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label-custom">Extra Notes (Optional)</label>
-          <textarea id="orderNotes" class="form-control-custom" rows="2" placeholder="Kuch aur notes..."></textarea>
-        </div>
-        <button class="btn-add" onclick="submitOrder()">
-          <i class="fab fa-whatsapp me-2"></i> Send Order via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FLOATING BUTTONS -->
-<div class="cart-float" onclick="openCart()" style="cursor:pointer;">
-  <i class="fas fa-shopping-cart"></i>
-  <div class="cart-badge" id="cartCount">0</div>
-</div>
-<a href="https://wa.me/918680922906" target="_blank" class="wa-float" title="WhatsApp Order">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// ── PARTICLES ──
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+  // Set current year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-const sparks = Array.from({length: 60}, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  r: Math.random() * 1.5 + .3,
-  vx: (Math.random() - .5) * .3,
-  vy: (Math.random() - .5) * .3,
-  a: Math.random(),
-  da: (Math.random() - .5) * .01,
-  color: Math.random() > .5 ? '#f5c518' : '#c0392b'
-}));
-
-function animParticles() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  sparks.forEach(s => {
-    s.x += s.vx; s.y += s.vy;
-    s.a = Math.max(0, Math.min(1, s.a + s.da));
-    if (s.a <= 0 || s.a >= 1) s.da *= -1;
-    if (s.x < 0) s.x = canvas.width;
-    if (s.x > canvas.width) s.x = 0;
-    if (s.y < 0) s.y = canvas.height;
-    if (s.y > canvas.height) s.y = 0;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = s.color + Math.floor(s.a * 99).toString(16).padStart(2,'0');
-    ctx.fill();
+  // Contact form handling
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    const projectType = document.getElementById('projectType').value;
+    const budget = document.getElementById('budget').value;
+    
+    // Build email body
+    let emailBody = `Name: ${name}\n`;
+    emailBody += `Email: ${email}\n`;
+    emailBody += `Subject: ${subject}\n\n`;
+    if (projectType) emailBody += `Project Type: ${projectType}\n`;
+    if (budget) emailBody += `Budget: ${budget}\n\n`;
+    emailBody += `Message:\n${message}`;
+    
+    // Create mailto link
+    const mailtoLink = `mailto:amitrajbhar04042001@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    document.getElementById('successMessage').style.display = 'block';
+    
+    // Reset form
+    this.reset();
+    
+    // Hide success message after 5 seconds
+    setTimeout(function() {
+      document.getElementById('successMessage').style.display = 'none';
+    }, 5000);
   });
-  requestAnimationFrame(animParticles);
-}
-animParticles();
 
-// ── PRODUCTS DATA ──
-const products = [
-  { id:1,  name: '3½" Lakshmi Crackers',   cat: 'sound',    icon: '🧨', price: 12,   tag: 'hot', desc: '1 Pkt' },
-  { id:2,  name: 'Flower Pots DLX',         cat: 'fountain', icon: '🌸', price: 200,  tag: 'hot', desc: '1 Pkt' },
-  { id:3,  name: '240 Multicolor Shots',    cat: 'shot',     icon: '🎆', price: 3000, tag: 'new', desc: '1 Box' },
-  { id:4,  name: '120 Shot Multicolor',     cat: 'shot',     icon: '🎇', price: 1500, tag: '',    desc: '1 Box' },
-  { id:5,  name: '50cm Color Sparklers',    cat: 'sparkler', icon: '✨', price: 200,  tag: '',    desc: '1 Box' },
-  { id:6,  name: 'Ground Chakkar DLX',      cat: 'fountain', icon: '🌀', price: 120,  tag: '',    desc: '1 Box' },
-  { id:7,  name: 'Operation Sindoor Tank',  cat: 'new',      icon: '🪖', price: 700,  tag: 'new', desc: '9 in 1' },
-  { id:8,  name: 'Bada Peacock Fountain',   cat: 'fountain', icon: '🦚', price: 370,  tag: '',    desc: '1 Box' },
-  { id:9,  name: 'Digital Bomb Extra',      cat: 'sound',    icon: '💣', price: 275,  tag: 'hot', desc: '1 Box' },
-  { id:10, name: 'Guitar Fancy',            cat: 'new',      icon: '🎸', price: 250,  tag: 'new', desc: '1 Box' },
-  { id:11, name: '6" Pipe Single Ball',     cat: 'shot',     icon: '🚀', price: 1400, tag: '',    desc: '1 Box' },
-  { id:12, name: 'AK47 Fountain',           cat: 'new',      icon: '🔫', price: 220,  tag: 'new', desc: '1 Box' },
-];
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Close mobile menu if open
+        const navbarCollapse = document.getElementById('navmenu');
+        if (navbarCollapse.classList.contains('show')) {
+          bootstrap.Collapse.getInstance(navbarCollapse).hide();
+        }
+      }
+    });
+  });
 
-// ── CART STATE ──
-let cartItems = {}; // { productId: qty }
+  // Add active class to navigation on scroll
+  window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 100)) {
+        current = section.getAttribute('id');
+      }
+    });
 
-function getProduct(id) { return products.find(p => p.id === id); }
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
 
-function renderProducts(filter) {
-  const grid = document.getElementById('productsGrid');
-  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-  grid.innerHTML = filtered.map((p, i) => {
-    const inCart = cartItems[p.id] || 0;
-    return `
-    <div class="col-6 col-md-4 col-lg-3 product-item" data-cat="${p.cat}" style="animation: fadeUp .5s ease ${i*.07}s both;">
-      <div class="product-card" id="card-${p.id}">
-        <div class="product-card-img">${p.icon}</div>
-        <div class="product-card-body">
-          <div class="d-flex justify-content-between align-items-start mb-1">
-            <h6>${p.name}</h6>
-            ${p.tag === 'new' ? '<span class="tag-new">NEW</span>' : p.tag === 'hot' ? '<span class="tag-hot">🔥</span>' : ''}
-          </div>
-          <p class="sub">${p.desc}</p>
-          <div class="d-flex align-items-center mt-2">
-            <span class="product-price">₹${p.price}</span>
-            <span class="product-old-price">₹${Math.round(p.price * 1.3)}</span>
-          </div>
-          <div id="btn-area-${p.id}" class="mt-3">
-            ${inCart > 0 ? qtyControlHTML(p.id, inCart) : addBtnHTML(p.id)}
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
+  /* Typewriter implementation */
+  (function() {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
 
-function addBtnHTML(id) {
-  return `<button class="btn-add" onclick="addToCart(${id})">
-    <i class="fas fa-plus me-1"></i> Add to Cart
-  </button>`;
-}
+    const phrases = [
+      'Amit Rajbhar',
+      'Full-stack Developer',
+      'Laravel • Node • Vue'
+    ];
 
-function qtyControlHTML(id, qty) {
-  return `<div style="display:flex;align-items:center;gap:0;border:1px solid rgba(245,197,24,.3);border-radius:8px;overflow:hidden;margin-top:0;">
-    <button onclick="changeQty(${id},-1)" style="background:rgba(192,57,43,.3);border:none;color:var(--cream);width:36px;height:36px;font-size:16px;cursor:pointer;transition:.2s;" onmouseover="this.style.background='rgba(192,57,43,.6)'" onmouseout="this.style.background='rgba(192,57,43,.3)'">−</button>
-    <span style="flex:1;text-align:center;font-family:'Cinzel',serif;font-weight:700;color:var(--gold);font-size:15px;background:rgba(245,197,24,.06);">${qty}</span>
-    <button onclick="changeQty(${id},+1)" style="background:rgba(26,188,156,.3);border:none;color:var(--cream);width:36px;height:36px;font-size:16px;cursor:pointer;transition:.2s;" onmouseover="this.style.background='rgba(26,188,156,.6)'" onmouseout="this.style.background='rgba(26,188,156,.3)'">+</button>
-  </div>
-  <div style="text-align:center;font-size:11px;color:rgba(255,249,237,.4);margin-top:4px;">₹${(getProduct(id).price * qty).toLocaleString('en-IN')} total</div>`;
-}
+    let part = 0;
+    let partIndex = 0;
+    let intervalVal;
+    let typing = true;
 
-function addToCart(id) {
-  cartItems[id] = (cartItems[id] || 0) + 1;
-  refreshCardUI(id);
-  updateCartBadge();
-  updateCartDrawer();
-  // bounce animation on float button
-  const btn = document.querySelector('.cart-float');
-  btn.style.transform = 'scale(1.3)';
-  setTimeout(() => btn.style.transform = '', 300);
-}
+    function type() {
+      const text = phrases[part].substring(0, partIndex + (typing ? 1 : -1));
+      el.textContent = text;
 
-function changeQty(id, delta) {
-  const newQty = (cartItems[id] || 0) + delta;
-  if (newQty <= 0) {
-    delete cartItems[id];
-  } else {
-    cartItems[id] = newQty;
-  }
-  refreshCardUI(id);
-  updateCartBadge();
-  updateCartDrawer();
-}
-
-function refreshCardUI(id) {
-  const area = document.getElementById(`btn-area-${id}`);
-  if (!area) return;
-  const qty = cartItems[id] || 0;
-  area.innerHTML = qty > 0 ? qtyControlHTML(id, qty) : addBtnHTML(id);
-  // highlight card
-  const card = document.getElementById(`card-${id}`);
-  if (card) {
-    if (qty > 0) {
-      card.style.borderColor = 'rgba(245,197,24,.45)';
-      card.style.boxShadow = '0 0 20px rgba(245,197,24,.12)';
-    } else {
-      card.style.borderColor = '';
-      card.style.boxShadow = '';
+      if (typing) {
+        partIndex++;
+        if (partIndex === phrases[part].length) {
+          typing = false;
+          clearInterval(intervalVal);
+          setTimeout(() => { intervalVal = setInterval(type, 60); }, 1000);
+        }
+      } else {
+        partIndex--;
+        if (partIndex === 0) {
+          typing = true;
+          part = (part + 1) % phrases.length;
+        }
+      }
     }
-  }
-}
 
-function updateCartBadge() {
-  const totalQty = Object.values(cartItems).reduce((a,b) => a+b, 0);
-  document.getElementById('cartCount').textContent = totalQty;
-}
-
-function updateCartDrawer() {
-  const itemsDiv = document.getElementById('cartItemsList');
-  const emptyDiv = document.getElementById('emptyCart');
-  const footer   = document.getElementById('cartFooter');
-  const warn     = document.getElementById('minOrderWarn');
-  const drawerCount = document.getElementById('drawerItemCount');
-
-  const keys = Object.keys(cartItems).filter(k => cartItems[k] > 0);
-  const totalQty = keys.reduce((a,k) => a + cartItems[k], 0);
-  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
-  const packing  = Math.round(subtotal * 0.03);
-  const total    = subtotal + packing;
-
-  drawerCount.textContent = totalQty + ' item' + (totalQty !== 1 ? 's' : '');
-
-  if (keys.length === 0) {
-    emptyDiv.style.display = 'block';
-    footer.style.display = 'none';
-    warn.style.display = 'none';
-    itemsDiv.innerHTML = '';
-    itemsDiv.appendChild(emptyDiv);
-    return;
-  }
-
-  emptyDiv.style.display = 'none';
-  footer.style.display = 'block';
-  warn.style.display = subtotal < 3000 ? 'block' : 'none';
-
-  itemsDiv.innerHTML = keys.map(k => {
-    const p = getProduct(+k);
-    const qty = cartItems[k];
-    return `<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(245,197,24,.07);">
-      <div style="width:48px;height:48px;background:linear-gradient(135deg,#251a0a,#3a2510);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;">${p.icon}</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
-        <div style="font-size:11px;color:rgba(255,249,237,.4);">₹${p.price} × ${qty}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(245,197,24,.2);border-radius:6px;overflow:hidden;flex-shrink:0;">
-        <button onclick="changeQty(${p.id},-1)" style="background:rgba(192,57,43,.2);border:none;color:var(--cream);width:28px;height:28px;cursor:pointer;font-size:14px;">−</button>
-        <span style="width:28px;text-align:center;font-size:13px;font-weight:700;color:var(--gold);background:rgba(245,197,24,.06);">${qty}</span>
-        <button onclick="changeQty(${p.id},+1)" style="background:rgba(26,188,156,.2);border:none;color:var(--cream);width:28px;height:28px;cursor:pointer;font-size:14px;">+</button>
-      </div>
-      <div style="min-width:54px;text-align:right;font-family:'Cinzel',serif;font-size:13px;color:var(--gold);">₹${(p.price*qty).toLocaleString('en-IN')}</div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('subtotalAmt').textContent = '₹' + subtotal.toLocaleString('en-IN');
-  document.getElementById('packingAmt').textContent  = '₹' + packing.toLocaleString('en-IN');
-  document.getElementById('totalAmt').textContent    = '₹' + total.toLocaleString('en-IN');
-}
-
-function openCart() {
-  document.getElementById('cartDrawer').style.right = '0';
-  document.getElementById('cartOverlay').style.display = 'block';
-  updateCartDrawer();
-}
-
-function closeCart() {
-  document.getElementById('cartDrawer').style.right = '-420px';
-  document.getElementById('cartOverlay').style.display = 'none';
-}
-
-function clearCart() {
-  if (!Object.keys(cartItems).length) return;
-  Object.keys(cartItems).forEach(k => delete cartItems[k]);
-  // reset all card UIs
-  products.forEach(p => {
-    const area = document.getElementById(`btn-area-${p.id}`);
-    const card = document.getElementById(`card-${p.id}`);
-    if (area) area.innerHTML = addBtnHTML(p.id);
-    if (card) { card.style.borderColor = ''; card.style.boxShadow = ''; }
-  });
-  updateCartBadge();
-  updateCartDrawer();
-}
-
-function proceedToOrder() {
-  const keys = Object.keys(cartItems).filter(k => cartItems[k] > 0);
-  if (!keys.length) return;
-  // Fill modal summary
-  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
-  const packing  = Math.round(subtotal * 0.03);
-  const total    = subtotal + packing;
-  const summary  = document.getElementById('modalCartSummary');
-  summary.innerHTML = keys.map(k => {
-    const p = getProduct(+k);
-    return `<div style="display:flex;justify-content:space-between;margin-bottom:6px;">
-      <span>${p.icon} ${p.name} × ${cartItems[k]}</span>
-      <span style="color:var(--gold);">₹${(p.price*cartItems[k]).toLocaleString('en-IN')}</span>
-    </div>`;
-  }).join('') + `<div style="border-top:1px solid rgba(245,197,24,.15);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;font-family:'Cinzel',serif;color:var(--gold);">
-    <span>Total (incl. packing)</span><span>₹${total.toLocaleString('en-IN')}</span>
-  </div>`;
-  closeCart();
-  new bootstrap.Modal(document.getElementById('orderModal')).show();
-}
-
-function filterProducts(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProducts(cat);
-}
-
-function submitOrder() {
-  const name  = document.getElementById('orderName').value.trim();
-  const phone = document.getElementById('orderPhone').value.trim();
-  const state = document.getElementById('orderState').value;
-  const notes = document.getElementById('orderNotes').value.trim();
-  const keys  = Object.keys(cartItems).filter(k => cartItems[k] > 0);
-  if (!keys.length) { alert('Cart khaali hai!'); return; }
-  const subtotal = keys.reduce((a,k) => a + getProduct(+k).price * cartItems[k], 0);
-  const total    = subtotal + Math.round(subtotal * 0.03);
-  const itemLines = keys.map(k => {
-    const p = getProduct(+k);
-    return `  • ${p.name} × ${cartItems[k]} = ₹${(p.price*cartItems[k]).toLocaleString('en-IN')}`;
-  }).join('\n');
-  const msg = `🎆 *New Order — Sai Crackers* 🎆\n\n👤 Name: ${name || 'N/A'}\n📞 Phone: ${phone || 'N/A'}\n📍 State: ${state || 'N/A'}\n\n🛒 *Order Items:*\n${itemLines}\n\n💰 *Total: ₹${total.toLocaleString('en-IN')}* (incl. 3% packing)\n\n📝 Notes: ${notes || 'None'}`;
-  window.open('https://wa.me/918680922906?text=' + encodeURIComponent(msg), '_blank');
-}
-
-renderProducts('all');
-
-// ── INTERSECTION OBSERVER ANIMA
+    // start
+    intervalVal = setInterval(type, 60);
+  })();
+</script>
+</body>
+</html>
